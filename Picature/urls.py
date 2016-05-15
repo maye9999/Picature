@@ -20,7 +20,6 @@ from django.conf.urls.static import static
 from editor.views import home
 
 
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^u/', include('users.urls')),

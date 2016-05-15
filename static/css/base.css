@@ -1,0 +1,15 @@
+.navbar-icon{
+	width: 0.8em;
+	height: 0.8em;
+}
+
+.navbar-icon path{
+	fill: #9d9d9d;
+}
+.navbar-brand:hover path{
+	fill: #ffffff;
+}
+
+.pointer-cursor {
+	cursor: pointer;
+}

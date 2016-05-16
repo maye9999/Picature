@@ -17,7 +17,11 @@ window.onload = function () {
           return path
         }
       },
-      language: 'en'
+      language: 'en',
+      export: {
+        download: false,
+        type: PhotoEditorSDK.RenderType.DATAURL
+      }
     })
   }
 
@@ -26,28 +30,16 @@ window.onload = function () {
    */
   var myImage = new Image();
   myImage.addEventListener('load', function () {
-    run()
+    run();
+    editor.on('export', function(dataURL) {
+      $.post('/images/upload/', {"image": dataURL}).done(function() {
+        console.log('saved!');
+      })
+    });
   });
   myImage.src = '/static/test.jpg';
 
-  /**
-   * Handle links
-   */
-  var webglLink = document.body.querySelector('#webgl');
-  var canvasLink = document.body.querySelector('#canvas');
-  webglLink.addEventListener('click', function (e) {
-    e.preventDefault();
-    editor.dispose();
-    canvasLink.classList.remove('active');
-    webglLink.classList.add('active');
-    run('webgl')
-  });
 
-  canvasLink.addEventListener('click', function (e) {
-    e.preventDefault();
-    editor.dispose();
-    webglLink.classList.remove('active');
-    canvasLink.classList.add('active');
-    run('canvas')
-  })
+
+
 };

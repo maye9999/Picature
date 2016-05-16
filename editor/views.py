@@ -18,7 +18,7 @@ def home(request):
 
 
 def editor(request):
-    return render(request, 'editor.html')
+    return render(request, 'editor/editor.html')
 
 
 def filters(request, fid):

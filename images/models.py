@@ -9,6 +9,7 @@ class ImagePost(models.Model):
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='images')
     is_private = models.BooleanField(default=False)
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE, related_name='images')
+    description = models.TextField()
 
     # comments
     # like_users

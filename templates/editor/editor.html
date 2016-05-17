@@ -3,30 +3,22 @@
 
 {% block sheetstyle %}
     <!-- PhotoEditorSDK CSS  -->
-    <link rel="stylesheet" href={% static "css/PhotoEditorReactUI.css" %} />
+    <link rel="stylesheet" href={% static "css/PhotoEditorReactUI.css" %}/>
     <link rel="stylesheet" href={% static "css/stylesheet.css" %} />
 {% endblock %}
 
 {% block body %}
     <div class="container-fluid" style="height: calc(100% - 52px);">
     <div class="row" style="height: 100%">
-        <div class="col-sm-1">
+        <div class="col-sm-1" style="margin-top: 100px">
             <p>ABCDEFG</p>
             <p>ABCDEFG</p>
             <p>ABCDEFG</p>
             <p>ABCDEFG</p>
-            <p>ABCDEFG</p>
-            <p>ABCDEFG</p>
-            <p>ABCDEFG</p>
-            <p>ABCDEFG</p>
-
         </div>
 
         <div class="col-sm-10" id="editor-container" style="height: 100%">
-            <p>ABCDEFG</p>
-            <p>ABCDEFG</p>
-            <p>ABCDEFG</p>
-            <p>ABCDEFG</p>
+            <p>Loading.....</p>
         </div>
 
         <div class="col-sm-1">
@@ -39,6 +31,26 @@
         </div>
 
     </div>
+    </div>
+
+    <div class="modal fade" id="nameModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="image-name">Image Name</label><input type="text" id="image-name">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal"id="export-image">Save changes</button>
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
@@ -47,5 +59,12 @@
     <script src={% static "js/PhotoEditorSDK.js" %}></script>
     <script src={% static "js/PhotoEditorReactUI.js" %}></script>
     <script src={% static "js/application.js" %}></script>
+
+    <script>
+        $("#nameModal").on('shown.bs.modal', function () {
+            $('#image-name').focus();
+        });
+
+    </script>
 
 {% endblock %}

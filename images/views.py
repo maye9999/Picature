@@ -1,6 +1,7 @@
 import uuid
 from base64 import b64decode
 
+import time
 from django.core.files.base import ContentFile
 from django.http import HttpResponse
 from .models import ImagePost
@@ -25,5 +26,5 @@ def upload_image(request):
     data = b64decode(data)
     image_name = str(uuid.uuid4()) + ".png"
     post.image = ContentFile(data, image_name)
-    post.save()
+    # post.save()
     return HttpResponse("OK")

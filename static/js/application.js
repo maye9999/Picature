@@ -7,6 +7,7 @@ window.onload = function () {
       preferredRenderer: preferredRenderer || 'webgl',
       container: document.querySelector('#editor-container'),
       image: myImage,
+      webcam: false,
       maxMegaPixels: {
         desktop: 100
       },
@@ -29,17 +30,25 @@ window.onload = function () {
    * Load initial image, initialize UI
    */
   var myImage = new Image();
+  var imageData;
   myImage.addEventListener('load', function () {
     run();
+
     editor.on('export', function(dataURL) {
-      $.post('/images/upload/', {"image": dataURL}).done(function() {
-        console.log('saved!');
-      })
+      imageData = dataURL;
+      $('#nameModal').modal();
     });
   });
   myImage.src = '/static/test.jpg';
 
 
+  $("#export-image").on('click', function() {
+    var image_name = $("#image-name").val();
+    $.post('/images/upload/', {"image": imageData, "image_name": image_name}).done(function() {
+      console.log('saved!');
+    });
+
+  })
 
 
 };

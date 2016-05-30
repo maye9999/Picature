@@ -27,5 +27,5 @@ urlpatterns = [
     url(r'^themes/', include('themes.urls')),
     url(r'^editor/', include('editor.urls')),
     url(r'^timeline/', include('timeline.urls')),
-    url(r'^$', home)
+    url(r'^$', home, name='home')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

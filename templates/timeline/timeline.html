@@ -2,134 +2,64 @@
 {% load staticfiles %}
 
 {% block sheetstyle %}
-<style>
-.card {
-    background:#FFF;
-    border:1px solid #AAA;
-    border-bottom:3px solid #BBB;
-    padding:0;
-    margin:15px;
-    overflow:hidden;
-}
-.card h1 {
-    margin:0;
-    padding: 10px 10px 0;
-}
+<link rel="stylesheet" href={% static "css/timeline.css" %}>
+{% endblock %}
 
-.card p {
-    margin:0;
-    padding:10px;
-}
-
-.card-image {
-    padding:0;
-    margin:0;
-    background: no-repeat;
-    background-size: cover;
-    position:relative;
-    overflow:hidden;
-}
-
-.card-image > img {
-    vertical-align: top;
-    max-width: 300px;
-{#    width: 100%;#}
-    height: auto;
-    opacity: 0;
-}
-
-.card-image h1,
-.card-image h2,
-.card-image h3,
-.card-image h4,
-.card-image h5,
-.card-image h6 {
-    position:absolute;
-    bottom:0;
-    width:100%;
-    color:white;
-    background:rgba(0,0,0,0.65);
-    margin:0;
-    padding:6px;
-    border:none;
-}
-
-.blog-header {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.blog-title {
-    margin-top: 30px;
-    margin-bottom: 0;
-    font-size: 60px;
-    font-weight: normal;
-}
-
-.sidebar-module-inset {
-    padding: 15px;
-    background-color: #f5f5f5;
-    border-radius: 4px;
-}
-
-.sidebar-module {
-    padding: 15px;
-    margin: 0 -15px 15px;
-}
-
-</style>
+{% block navbar %}
+    {% include 'framework/navbar.html' %}
 {% endblock %}
 
 {% block main_content %}
-    <div class="container">
-    <div class="blog-header">
-        <h1 class="blog-title">展示广场</h1>
-        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
-    </div>
-    <div class="row">
-
-        <div class="timeline-main col-sm-8">
-            <div id="timeline-main">
-
+    <section id="portfolio" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Portfolio</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
             </div>
-{#            {% for post in posts %}#}
-{#                {% include "timeline/card.html" with post=post %}#}
-{#            {% endfor %}#}
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 portfolio-item">
+                    <div class="portfolio-caption">
+                        <h4>Round Icons</h4>
+                        <p class="text-muted">Graphic Design</p>
+                    </div>
+                    <a href="#portfolioModal" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover" data-toggle="tooltip" title="click to apply this theme">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src={% static "img/portfolio/roundicons.png" %} class="img-responsive" alt="">
+                    </a>
+                </div>
+                <div class="col-md-6 col-md-offset-3 portfolio-item">
+                    <div class="portfolio-caption">
+                        <h4>Startup Framework</h4>
+                        <p class="text-muted">Website Design</p>
+                    </div>
+                    <a href="#portfolioModal" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover" data-toggle="tooltip" title="click to apply this theme">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src={% static "img/portfolio/startup-framework.png" %} class="img-responsive" alt="">
+                    </a>
+                </div>
+            </div>
         </div>
+    <section>
 
-        <div class="col-sm-3 col-sm-offset-1 timeline-sidebar">
-          <div class="sidebar-module sidebar-module-inset">
-            <h4>About</h4>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-          </div>
-          <div class="sidebar-module">
-            <h4>Archives</h4>
-            <ol class="list-unstyled">
-              <li><a href="#">March 2014</a></li>
-              <li><a href="#">February 2014</a></li>
-              <li><a href="#">January 2014</a></li>
-              <li><a href="#">December 2013</a></li>
-              <li><a href="#">November 2013</a></li>
-              <li><a href="#">October 2013</a></li>
-              <li><a href="#">September 2013</a></li>
-              <li><a href="#">August 2013</a></li>
-              <li><a href="#">July 2013</a></li>
-              <li><a href="#">June 2013</a></li>
-              <li><a href="#">May 2013</a></li>
-              <li><a href="#">April 2013</a></li>
-            </ol>
-          </div>
-          <div class="sidebar-module">
-            <h4>Elsewhere</h4>
-            <ol class="list-unstyled">
-              <li><a href="#">GitHub</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Facebook</a></li>
-            </ol>
-          </div>
+    <div class="container">
+        <div class="row">
+
+            <div class="timeline-main col-sm-10 col-sm-offset-1">
+                <div id="timeline-main">
+
+                </div>
+            </div>
         </div>
-
-    </div>
     </div>
 {% endblock %}
 

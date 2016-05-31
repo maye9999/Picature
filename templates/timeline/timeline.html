@@ -10,71 +10,141 @@
 {% endblock %}
 
 {% block main_content %}
-    <section id="portfolio" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Portfolio</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
+<section id="portfolio" class="bg-light-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Portfolio</h2>
+                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
             </div>
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3 portfolio-item">
-                    <div class="portfolio-caption">
-                        <h4>Round Icons</h4>
-                        <p class="text-muted">Graphic Design</p>
-                    </div>
-                    <a href="#portfolioModal" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover" data-toggle="tooltip" title="click to apply this theme">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src={% static "img/portfolio/roundicons.png" %} class="img-responsive" alt="">
-                    </a>
+        </div>
+        <div class="row" id="timeline-main">
+            <div class="col-md-6 col-md-offset-3 portfolio-item">
+                <div class="portfolio-caption">
+                    <h4>Round Icons</h4>
+                    <p class="text-muted">Graphic Design</p>
                 </div>
-                <div class="col-md-6 col-md-offset-3 portfolio-item">
-                    <div class="portfolio-caption">
-                        <h4>Startup Framework</h4>
-                        <p class="text-muted">Website Design</p>
-                    </div>
-                    <a href="#portfolioModal" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover" data-toggle="tooltip" title="click to apply this theme">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
+                <a href="#portfolioModal" class="portfolio-link" data-toggle="modal">
+                    <div class="portfolio-hover" data-toggle="tooltip" title="click to apply this theme">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-5x"></i>
                         </div>
-                        <img src={% static "img/portfolio/startup-framework.png" %} class="img-responsive" alt="">
-                    </a>
+                    </div>
+                    <img src={% static "img/portfolio/roundicons.png" %} class="img-responsive" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<p class="text-muted text-center" id="loading">
+    <img src={% static "img/loading.gif"%} alt="loading" />
+</p>
+
+<!-- Portfolio Modal 1 -->
+<div class="portfolio-modal modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+                <div class="rl">
                 </div>
             </div>
         </div>
-    <section>
-
-    <div class="container">
-        <div class="row">
-
-            <div class="timeline-main col-sm-10 col-sm-offset-1">
-                <div id="timeline-main">
-
+        <div class="container" id="photo-gallary">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="modal-body">
+                        <!-- Project Details Go Here -->
+                        <h2>Your Photos</h2>
+                        <p class="item-intro text-muted">Choose one or more photos to apply this theme.</p>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="photo-gallary-hover">
+                                    <img class="img-responsive" src={% static "test.jpg" %} alt="" />
+                                    <div class="photo-gallary-hover-content">
+                                        <i class="fa fa-check fa-5x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="photo-gallary-hover">
+                                    <img class="img-responsive" src={% static "img/jump.jpg" %} alt="" />
+                                    <div class="photo-gallary-hover-content">
+                                        <i class="fa fa-check fa-5x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="photo-gallary-hover">
+                                    <img class="img-responsive" src={% static "img/loading.gif" %} alt="" />
+                                    <div class="photo-gallary-hover-content">
+                                        <i class="fa fa-check fa-5x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="photo-gallary-hover">
+                                    <img class="img-responsive" src={% static "img/team/2.jpg" %} alt="" />
+                                    <div class="photo-gallary-hover-content">
+                                        <i class="fa fa-check fa-5x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="photo-gallary-hover">
+                                    <img class="img-responsive" src={% static "img/team/2.jpg" %} alt="" />
+                                    <div class="photo-gallary-hover-content">
+                                        <i class="fa fa-check fa-5x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="photo-gallary-hover">
+                                    <img class="img-responsive" src={% static "img/team/2.jpg" %} alt="" />
+                                    <div class="photo-gallary-hover-content">
+                                        <i class="fa fa-check fa-5x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="photo-gallary-hover">
+                                    <img class="img-responsive" src={% static "img/team/2.jpg" %} alt="" />
+                                    <div class="photo-gallary-hover-content">
+                                        <i class="fa fa-check fa-5x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="photo-gallary-hover">
+                                    <img class="img-responsive" src={% static "img/team/2.jpg" %} alt="" />
+                                    <div class="photo-gallary-hover-content">
+                                        <i class="fa fa-check fa-5x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-modal-apply" data-dismiss="modal">Apply</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 {% endblock %}
 
 {% block script %}
-    <script src={% static "js/waterfall.js"%}></script>
+    <!-- <script src={% static "js/waterfall.js"%}></script>
     <script>
         $('#timeline-main').waterfall({
-            itemCls: 'card',
+            itemCls: 'portfolio-item',
             fitWidth: true,
-            colWidth: 350,
-            gutterWidth: 10,
-            gutterHeight: 20,
+            colWidth: 0,
+            gutterWidth: 0,
+            gutterHeight: 0,
             align: 'center',
             minCol: 1,
-            maxCol: 3,
+            maxCol: 1,
             maxPage: undefined,
             bufferPixel: -50,
             containerStyle: {
@@ -93,5 +163,25 @@
 
             debug: false
         });
+    </script> -->
+
+    <script type="text/javascript">
+        $(function() {
+            var win = $(window);
+            win.scroll(function() {
+                if ($(document).height() - win.height() == win.scrollTop()) {
+                    $('#loading').show();
+                    $.ajax({
+                        url: '/timeline/posts?page=1',
+                        dataType: 'html',
+                        success: function(html) {
+                            $('#timeline-main').append(html);
+                            $('#loading').hide();
+                        }
+                    })
+                }
+            })
+        })
     </script>
+
 {% endblock %}

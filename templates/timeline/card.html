@@ -1,10 +1,17 @@
 {% for i in posts %}
-<div class="card">
-    <div class="card-image" style="background-image: url('/static/test2.jpg')">
-        <img src='/static/test2.jpg'>
-        <h2>Image, Banner, & HTML</h2>
+{% load staticfiles %}
+<div class="col-md-6 col-md-offset-3 portfolio-item">
+    <div class="portfolio-caption">
+        <h4>Round Icons</h4>
+        <p class="text-muted">Graphic Design</p>
     </div>
-    <p>All standard HTML structures, styled with CSS.</p>
+    <a href="#portfolioModal" class="portfolio-link" data-toggle="modal">
+        <div class="portfolio-hover" data-toggle="tooltip" title="click to apply this theme">
+            <div class="portfolio-hover-content">
+                <i class="fa fa-plus fa-5x"></i>
+            </div>
+        </div>
+        <img src={% static "img/portfolio/roundicons.png" %} class="img-responsive" alt="">
+    </a>
 </div>
 {% endfor %}
-

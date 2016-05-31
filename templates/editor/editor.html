@@ -7,30 +7,9 @@
     <link rel="stylesheet" href={% static "css/stylesheet.css" %} />
 {% endblock %}
 
-{% block body %}
-    <div class="container-fluid" style="height: calc(100% - 52px);">
-    <div class="row" style="height: 100%">
-        <div class="col-sm-1" style="margin-top: 100px">
-            <p>ABCDEFG</p>
-            <p>ABCDEFG</p>
-            <p>ABCDEFG</p>
-            <p>ABCDEFG</p>
-        </div>
-
-        <div class="col-sm-10" id="editor-container" style="height: 100%">
-            <p>Loading.....</p>
-        </div>
-
-        <div class="col-sm-1">
-            <p>ABCDEFG</p>
-            <p>ABCDEFG</p>
-            <p>ABCDEFG</p>
-            <p>ABCDEFG</p>
-            <p>ABCDEFG</p>
-
-        </div>
-
-    </div>
+{% block main_content %}
+    <div id="editor-container" style="height: 89%">
+        <p>Loading.....</p>
     </div>
 
     <div class="modal fade" id="nameModal" tabindex="-1" role="dialog">

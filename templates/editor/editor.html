@@ -9,20 +9,19 @@
 
 {% block main_content %}
     <div id="editor-container" style="height: 89%">
-        <p>Loading.....</p>
+        <p style="margin-top: 20%">Loading.....</p>
     </div>
 
     <div class="modal fade" id="nameModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <h4 class="modal-title">Modal title</h4>
-                </div>
                 <div class="modal-body">
-                    <label for="image-name">Image Name</label><input type="text" id="image-name">
+                    <p>
+                        <label for="image-name">Image Name</label><input type="text" id="image-name">
+                    </p>
+                    <p>
+                        <label for="theme-name">Theme Name</label><input type="text" id="theme-name">
+                    </p>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" data-dismiss="modal" id="export-image">Save changes</button>

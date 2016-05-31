@@ -59,6 +59,7 @@ window.onload = function() {
     console.log("user theme :");
     console.log(theme);
     var image_name = $("#image-name").val();
+    var theme_name = $("#theme-name").val();
     $.post('/images/upload/', {
         "image" : imageData,
         "image_name" : image_name,
@@ -69,26 +70,26 @@ window.onload = function() {
     });
   });
 
-  newImage = new Image();
-  newImage.addEventListener('load', function() {
-    const sdk = new PhotoEditorSDK('webgl', {image : newImage});
-    const oop = new PhotoEditorSDK.Operations.OrientationOperation(sdk, {
-      flipHorizontally : true,
-      flipVertically : true,
-    });
-    const fop = new PhotoEditorSDK.Operations.FilterOperation(
-        sdk, {filter : PhotoEditorSDK.Filters.FridgeFilter});
-    const aop = new PhotoEditorSDK.Operations.AdjustmentsOperation(
-        sdk, {brightness : 0.5, saturation : 0.3, contrast : 0.5});
-    console.log(aop.getDefaultOptions());
-    console.log(aop.getOptions());
-    sdk.addOperation(oop);
-    sdk.addOperation(aop);
-    sdk.export(PhotoEditorSDK.RenderType.IMAGE, // Export as `Image` object
-               PhotoEditorSDK.ImageFormat.JPEG, // Export as JPEG
-               0.8                              // JPEG quality: 80%
-               )
-        .then(function(image) { editor.setImage(image) })
-  });
-  newImage.src = '/static/cover.jpg';
+  // newImage = new Image();
+  // newImage.addEventListener('load', function() {
+  //   const sdk = new PhotoEditorSDK('webgl', {image : newImage});
+  //   const oop = new PhotoEditorSDK.Operations.OrientationOperation(sdk, {
+  //     flipHorizontally : true,
+  //     flipVertically : true,
+  //   });
+  //   const fop = new PhotoEditorSDK.Operations.FilterOperation(
+  //       sdk, {filter : PhotoEditorSDK.Filters.FridgeFilter});
+  //   const aop = new PhotoEditorSDK.Operations.AdjustmentsOperation(
+  //       sdk, {brightness : 0.5, saturation : 0.3, contrast : 0.5});
+  //   console.log(aop.getDefaultOptions());
+  //   console.log(aop.getOptions());
+  //   sdk.addOperation(oop);
+  //   sdk.addOperation(aop);
+  //   sdk.export(PhotoEditorSDK.RenderType.IMAGE, // Export as `Image` object
+  //              PhotoEditorSDK.ImageFormat.JPEG, // Export as JPEG
+  //              0.8                              // JPEG quality: 80%
+  //              )
+  //       .then(function(image) {  })
+  // });
+  // newImage.src = '/static/cover.jpg';
 };

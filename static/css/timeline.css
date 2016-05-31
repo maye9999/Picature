@@ -206,6 +206,10 @@ body {
     left: 35%;
 }
 
+#photo-gallary .photo-gallary-hover img {
+	width: 100%
+}
+
 .btn-modal-apply {
     margin-top: 40px;
 }

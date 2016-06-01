@@ -1,0 +1,11 @@
+{% for i in photos %}
+{% load staticfiles %}
+<div class="col-md-3 image-card">
+    <div class="photo-gallary-hover">
+        <img class="img-responsive" src={% static "img/team/2.jpg" %} alt="" />
+        <div class="photo-gallary-hover-content">
+            <i class="fa fa-check fa-5x"></i>
+        </div>
+    </div>
+</div>
+{% endfor %}

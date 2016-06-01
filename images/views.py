@@ -39,3 +39,8 @@ def upload_image(request):
     post.image = ContentFile(data, image_name)
     post.save()
     return HttpResponse("OK")
+
+
+def image_posts(request):
+
+    pass

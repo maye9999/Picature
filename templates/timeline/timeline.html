@@ -37,9 +37,9 @@
     </div>
 </section>
 
-<p class="text-muted text-center" id="loading">
-    <img src={% static "img/loading.gif"%} alt="loading" />
-</p>
+{#<p class="text-muted text-center" id="loading">#}
+{#    <img src={% static "img/loading.gif"%} alt="loading" />#}
+{#</p>#}
 
 <!-- Portfolio Modal 1 -->
 <div class="portfolio-modal modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -57,7 +57,7 @@
                         <!-- Project Details Go Here -->
                         <h2>Your Photos</h2>
                         <p class="item-intro text-muted">Choose one or more photos to apply this theme.</p>
-                        <div class="row">
+                        <div class="row" id="photo-timeline">
                             <div class="col-md-3">
                                 <div class="photo-gallary-hover">
                                     <img class="img-responsive" src={% static "test.jpg" %} alt="" />
@@ -123,7 +123,6 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary btn-modal-apply" data-dismiss="modal">Apply</button>
                     </div>
                 </div>
             </div>
@@ -134,49 +133,80 @@
 {% endblock %}
 
 {% block script %}
-    <!-- <script src={% static "js/waterfall.js"%}></script>
+{#    <script src={% static "js/waterfall.js"%}></script>#}
     <script>
-        $('#timeline-main').waterfall({
-            itemCls: 'portfolio-item',
-            fitWidth: true,
-            colWidth: 0,
-            gutterWidth: 0,
-            gutterHeight: 0,
-            align: 'center',
-            minCol: 1,
-            maxCol: 1,
-            maxPage: undefined,
-            bufferPixel: -50,
-            containerStyle: {
-                position: 'relative'
-            },
-            resizable: true,
-            isFadeIn: true,
-            isAnimated: true,
-            animationOptions: {
-            },
-            isAutoPrefill: true,
-            checkImagesLoaded: true,
-            path: ['/timeline/posts?page=', '/'],
-            dataType: 'html',
-            params: {},
+{#        $('#photo-timeline').waterfall({#}
+{#            itemCls: 'portfolio-item',#}
+{#            fitWidth: true,#}
+{#            colWidth: 0,#}
+{#            gutterWidth: 0,#}
+{#            gutterHeight: 0,#}
+{#            align: 'center',#}
+{#            minCol: 1,#}
+{#            maxCol: 1,#}
+{#            maxPage: undefined,#}
+{#            bufferPixel: -50,#}
+{#            containerStyle: {#}
+{#                position: 'relative'#}
+{#            },#}
+{#            resizable: true,#}
+{#            isFadeIn: true,#}
+{#            isAnimated: true,#}
+{#            animationOptions: {#}
+{#            },#}
+{#            isAutoPrefill: true,#}
+{#            checkImagesLoaded: true,#}
+{#            path: ['/timeline/posts?page=', '/'],#}
+{#            dataType: 'html',#}
+{#            params: {},#}
+{##}
+{#            debug: false#}
+{#        });#}
+{#        $('#portfolioModal').on('shown.bs.modal', function (e) {#}
+{#            alert('asd');#}
+{#            $('#photo-timeline').waterfall({#}
+{#                itemCls: 'image-card',#}
+{#                fitWidth: true,#}
+{#                colWidth: 0,#}
+{#                gutterWidth: 0,#}
+{#                gutterHeight: 0,#}
+{#                align: 'center',#}
+{#                minCol: 1,#}
+{#                maxCol: 5,#}
+{#                maxPage: undefined,#}
+{#                bufferPixel: -50,#}
+{#                containerStyle: {#}
+{#                    position: 'relative'#}
+{#                },#}
+{#                resizable: true,#}
+{#                isFadeIn: true,#}
+{#                isAnimated: true,#}
+{#                animationOptions: {#}
+{#                },#}
+{#                isAutoPrefill: true,#}
+{#                checkImagesLoaded: true,#}
+{#                path: ['/timeline/photos?page=', '/'],#}
+{#                dataType: 'html',#}
+{#                params: {},#}
+{##}
+{#                debug: false#}
+{#            });#}
+{#        });#}
 
-            debug: false
-        });
-    </script> -->
+    </script>
 
     <script type="text/javascript">
         $(function() {
             var win = $(window);
             win.scroll(function() {
                 if ($(document).height() - win.height() == win.scrollTop()) {
-                    $('#loading').show();
+{#                    $('#loading').show();#}
                     $.ajax({
                         url: '/timeline/posts?page=1',
                         dataType: 'html',
                         success: function(html) {
                             $('#timeline-main').append(html);
-                            $('#loading').hide();
+{#                            $('#loading').hide();#}
                         }
                     })
                 }

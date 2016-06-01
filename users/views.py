@@ -63,4 +63,8 @@ def my_register(request):
         u.save()
         u = authenticate(username=username, password=password1)
         login(request, u)
+
+        mu = MyUser()
+        mu.user = u
+        mu.save()
     return redirect('/')

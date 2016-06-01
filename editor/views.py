@@ -1,5 +1,7 @@
+from django.contrib import messages
 from django.contrib.messages import get_messages
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, redirect
+
 
 # Create your views here.
 
@@ -18,7 +20,11 @@ def home(request):
 
 
 def editor(request):
-    return render(request, 'editor/editor.html')
+    if request.user.is_authenticated():
+        return render(request, 'editor/editor.html')
+    else:
+        messages.add_message(request, messages.ERROR, "请登录或注册账号", extra_tags='login')
+        return redirect('/')
 
 
 def filters(request, fid):

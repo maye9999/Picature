@@ -19,12 +19,23 @@ def image(request, mid):
 
 def upload_image(request):
     _, data = request.POST['image'].split(',')
+    image_name = request.POST['image_name']
+    theme_name = request.POST['theme_name']
+    theme_content = request.POST['theme']
+    user = request.user.myuser
+    print(theme_content)
+
+    theme = Theme()
+    theme.name = theme_name
+    theme.operation = theme_content
+    theme.owner = user
+    theme.save()
 
     post = ImagePost()
-    post.user = MyUser.objects.filter()[0]
-    post.theme = Theme.objects.filter()[0]
+    post.user = user
+    post.theme = theme
     data = b64decode(data)
     image_name = str(uuid.uuid4()) + ".png"
     post.image = ContentFile(data, image_name)
-    # post.save()
+    post.save()
     return HttpResponse("OK")

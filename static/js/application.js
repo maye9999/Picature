@@ -37,7 +37,7 @@ window.onload = function() {
   myImage.src = '/static/test.jpg';
 
   $("#export-image").on('click', function() {
-    theme = new Array();
+    var theme = [];
     console.log('User used operations:');
     stack.forEach(function(operation) {
       console.log(operation.constructor.identifier);
@@ -55,7 +55,7 @@ window.onload = function() {
           contrast : operation.getContrast()
         })
       }
-    })
+    });
     console.log("user theme :");
     console.log(theme);
     var image_name = $("#image-name").val();
@@ -63,7 +63,7 @@ window.onload = function() {
     $.post('/images/upload/', {
         "image" : imageData,
         "image_name" : image_name,
-        "theme" : theme,
+        "theme" : JSON.stringify(theme),
         "theme_name" : theme_name
     }).done(function() {
         console.log('saved!');

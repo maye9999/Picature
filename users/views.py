@@ -68,3 +68,7 @@ def my_register(request):
         mu.user = u
         mu.save()
     return redirect('/')
+
+
+def myuser(request):
+    return render(request, 'users/myuser.html')

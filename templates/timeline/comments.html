@@ -1,4 +1,52 @@
+<form class="form-inline" style = "margin:15px">
+        <div class="form-group">
+            <h5 > comments:</h5>
+        </div>
+</form>
 {% for comment in comments %}
     <!-- TODO: younn -->
-<p>comment.content</p>
 {% endfor %}
+
+
+    <div class="portfolio-comment">
+         <div class="col-xs-3 col-md-2 col-sm-2 img">
+            <img src="/static/img/team/head_yym.png" style="max-width: 30%">
+        </div>
+        <label  style = "margin-left:-50px ">Younn</label>
+        <p class="text-muted" style = "margin-left:30px ">awesome! awesome! awesome! awesome! awesome! awesome! awesome! awesome! awesome!</p>
+        <div align="right"><label class="text-muted" style="margin-right:30px">2016-05-20</label></div>
+    </div>
+    <div class="portfolio-comment">
+        <div class="col-xs-3 col-md-2 col-sm-2 img">
+            <img src="/static/img/team/head_my.png" style="max-width: 30%">
+        </div>
+        <label  style = "margin-left:-50px ">Maye9999</label>
+        <p class="text-muted" style = "margin-left:30px ">GJ \@V@/</p>
+        <div align="right"><label class="text-muted" style="margin-right:30px">2016-05-20</label></div>
+    </div>
+    <div class="portfolio-comment">
+         <div class="col-xs-3 col-md-2 col-sm-2 img">
+            <img src="/static/img/team/head_lzn.jpg" style="max-width: 30%">
+        </div>
+        <label style = "margin-left:-50px ">Lzhengning</label>
+        <p class="text-muted"  style = "margin-left:30px ">233333</p>
+        <div align="right"><label class="text-muted" style="margin-right:30px">2016-05-20</label></div>
+    </div>
+
+   <div class="form-group"align="right" style = "margin:20px">
+      <input type="text" class="form-control" id="comment_content"
+         placeholder="share your comment">
+      <button class="btn btn-sm btn-danger" id = "comment_favorite" style = "margin:10px ">favorite</button>
+      <button class="btn btn-sm btn-info" id = "comment_content_commit" style = "margin:10px">commit</button>
+   </div>
+
+    <script>
+        $(function() {
+               $.ajax({
+                    url:'timeline/comments?post-id=0',
+                    dataType: 'html',
+                    success: function(html) {
+                        }
+                })
+        })
+    </script>

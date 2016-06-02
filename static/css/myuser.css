@@ -1,0 +1,24 @@
+.user_info{
+    background-color:white;
+    text-align:center;
+}
+
+.userheadicon{
+    max-width:255px;
+    max-height:255px;
+}
+
+.work{
+    text-align:center;
+    background-color:white;
+}
+
+.photos{
+-webkit-box-shadow:0 5px 15px;
+  -moz-box-shadow:0 5px 15px;
+  box-shadow:0 5px 15px ;
+  margin-bottom:15px;
+  max-width:255px;
+  max-height:255px;
+}
+

@@ -19,29 +19,7 @@
             </div>
         </div>
         <div class="row" id="timeline-main">
-            <div class="col-md-6 col-md-offset-3 portfolio-item" style="background-color:white">
-                <div class="portfolio-rightalign">
-                    <p class="text-muted">2016-04-30</p>
-                </div>
-                <div class="portfolio-caption">
-                    <h4 style = "margin:10px ">Round Icons</h4>
-                    <p class="text-muted">Graphic Design</p>
-                </div>
-                <a href="#portfolioModal" class="portfolio-link" data-toggle="modal">
-                    <div class="portfolio-hover" data-toggle="tooltip" title="click to apply this theme">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-5x"></i>
-                        </div>
-                    </div>
-                    <img src="/media/images/nk.PNG"  class="img-responsive" alt="">
-                </a>
-
-                <!--add-->
-                <div id = "Hiddenpart" style="display:none">
-
-                </div>
-
-                {% include 'timeline/comments.html' %}
+            {% include 'timeline/card.html' %}
         </div>
     </div>
 </section>
@@ -221,6 +199,46 @@
                 }
             })
         })
+    </script>
+
+    <script>
+        function toggle_comments(sel) {
+            var s = sel.parent().next();
+            if(s.is(":hidden")) {
+                sel.children().text("Hide Comments");
+                s.toggle('collapse');
+            }
+            else {
+                sel.children().text("Show Comments");
+                s.toggle('collapse');
+            }
+        }
+
+
+        function add_comment(sel) {
+            var content = sel.prev().prev().val();
+            if(content === "") {
+                return;
+            }
+            var id = sel.parent().parent().parent().prev().prev().text();
+            $.ajax('/timeline/add-comment', {data: {"content": content, "post-id": id}, type: "POST"}).done(function (data) {
+                sel.parent().parent().html(data);
+            });
+        }
+
+        function like(sel) {
+            var id = sel.parent().parent().parent().prev().prev().text();
+            $.ajax('like?post-id=' + id).success(function() {
+                sel.text('unfavorite');
+            });
+        }
+
+        function unlike(sel) {
+            var id = sel.parent().parent().parent().prev().prev().text();
+            $.ajax('unlike?post-id=' + id).success(function() {
+                sel.text('favorite');
+            });
+        }
     </script>
 
 {% endblock %}

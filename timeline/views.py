@@ -11,11 +11,19 @@ from .models import *
 # Create your views here.
 
 def home(request):
-    return render(request, 'timeline/timeline.html', {"posts": range(5)})
+    posts = ImagePost.objects.all()[:10]
+    return render(request, 'timeline/timeline.html', {"posts": posts, "user": request.user.myuser})
 
 
 def posts(request):
-    return render(request, 'timeline/card.html', {"posts": range(10)})
+    try:
+        page = int(request.GET['page'])
+    except:
+        page = 1
+    posts = ImagePost.objects.all()
+    if len(posts) >= 10:
+        posts = posts[page*10-10:page*10]
+    return render(request, 'timeline/card.html', {"posts": posts, "user": request.user.myuser})
 
 
 def photos(request):
@@ -65,7 +73,7 @@ def like(request):
     user = request.user.myuser
     user.like_images.add(image_post)
     user.save()
-    return JsonResponse("OK")
+    return HttpResponse("OK")
 
 
 def unlike(request):
@@ -78,7 +86,7 @@ def unlike(request):
     user = request.user.myuser
     user.like_images.remove(image_post)
     user.save()
-    return JsonResponse("OK")
+    return HttpResponse("OK")
 
 
 def tags(request):

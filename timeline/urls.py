@@ -5,7 +5,7 @@ urlpatterns = [
     url(r'^posts', posts),
     url(r'^photos', photos),
     url(r'^like', like),
-    url(r'^like', unlike),
+    url(r'^unlike', unlike),
     url(r'^comments', comments),
     url(r'^add-comment', add_comment),
 ]

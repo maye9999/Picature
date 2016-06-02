@@ -1,8 +1,8 @@
-{% for i in posts %}
+{% for post in posts.all %}
 {% load staticfiles %}
 <div class="col-md-6 col-md-offset-3 portfolio-item" style="background-color:white">
     <div class="portfolio-rightalign">
-        <p class="text-muted">2016-04-30</p>
+        <p class="text-muted">{{ post.upload_time }}</p>
     </div>
     <div class="portfolio-caption">
         <h4 style = "margin:10px ">Round Icons</h4>
@@ -14,15 +14,32 @@
                 <i class="fa fa-plus fa-5x"></i>
             </div>
         </div>
-        <img src="/media/images/nk.PNG"  class="img-responsive" alt="">
+        <img src="{{ post.image.url }}"  class="img-responsive" alt="">
     </a>
 
     <!--add-->
-    <div id = "Hiddenpart" style="display:none">
+    <div id = "Hiddenpart" style="display:none">{{ post.id }}</div>
 
+    <form class="form-inline" style = "margin:15px">
+        <div class="form-group" id="toggle-comments" onclick="toggle_comments($(this))">
+            <h5 > Show Comments</h5>
+        </div>
+    </form>
+
+
+    <div class="collapse">
+        <form class="form-inline" style = "margin:15px">
+            <div class="form-group">
+                <h5>comments:</h5>
+            </div>
+        </form>
+
+        <div>
+            {% include "timeline/comments.html" with comments=post.comments user=user post=post %}
+        </div>
     </div>
 
-    {% include 'timeline/comments.html' %}
+
 </div>
 {% endfor %}
 

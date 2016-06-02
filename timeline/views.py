@@ -11,6 +11,9 @@ from .models import *
 # Create your views here.
 
 def home(request):
+    if not request.user.is_authenticated():
+        messages.add_message(request, messages.ERROR, "请登录或注册账号", extra_tags='login')
+        return redirect('/')
     posts = ImagePost.objects.all()[:10]
     return render(request, 'timeline/timeline.html', {"posts": posts, "user": request.user.myuser})
 

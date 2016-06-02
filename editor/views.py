@@ -12,6 +12,8 @@ def home(request):
         m = message
         break
     if m is None:
+        if request.user.is_authenticated():
+            return render(request, 'index.html', {"user": request.user})
         return render(request, 'index.html')
     if m.extra_tags == 'login':
         return render(request, 'index.html', {'login_message': m.message})

@@ -18,7 +18,11 @@
             <div class="intro-text">
                 <div class="intro-lead-in">Customize and Share Your Theme</div>
                 <div class="intro-heading">Picature</div>
-                <a href={% url "editor" %} class="page-scroll btn btn-xl">Have a Try</a>
+                {% if user %}
+                <a href="/timeline" class="page-scroll btn btn-xl">Have a Try</a>
+                {% else %}
+                <a data-toggle="modal" href="#loginModal" class="page-scroll btn btn-xl">Have a Try</a>
+                {% endif %}
             </div>
         </div>
     </header>

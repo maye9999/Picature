@@ -1,27 +1,66 @@
-<!doctype html>
-<html class="no-js" lang="">
+{% extends 'framework/base.html' %}
 {% load staticfiles %}
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Picature</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href={% static "apple-touch-icon.png" %}>
-    <!-- Place favicon.ico in the root directory -->
+{% block sheetstyle %}
+    <link rel="stylesheet" href={% static "css/myuser.css" %}>
+{% endblock %}
 
-    <link rel="stylesheet" href={% static "css/normalize.css" %}>
-    <link rel="stylesheet" href={% static "css/main.css" %}>
-    <script src={% static "js/vendor/modernizr-2.8.3.min.js" %}></script>
-</head>
-<body>
+{% block navbar %}
+    {% include 'framework/navbar.html' %}
+{% endblock %}
 
-<!-- Add your site or application content here -->
-<p>Username: {{ user.user.username }}</p>
+{% block main_content %}
 
-<script>window.jQuery || document.write('<script src={% static "js/vendor/jquery-1.12.0.min.js"%}><\/script>')</script>
-<script src={% static "js/plugins.js" %}></script>
-<script src={% static "js/main.js" %}></script>
-</body>
-</html>
+    <!-- Header -->
+<div id = "userhead" style = "margin-top:50px;">
+        <div class="col-md-12 user_info">
+            <img class = "img-circle userheadicon" id = "user_headicon" src= {% static "img/team/head_my.png" %}>
+            <h3 id = "user_head">{{ user.user.username }}</h3>
+            <table align="center"style = "font-style: italic;">
+                <tr>
+                    <td><p class = "text-muted" style = "margin:5px">Themes {{ posts.count }}</p></td>
+                    <td><p class = "text-muted" style = "margin:5px">Favorites {{ favorites.count }}</p></td>
+{#                    <td><p class = "text-muted" style = "margin:5px">Fans 985</p></td>#}
+                </tr>
+            </table>
+            <div style = "padding:40px" class="col-md-12"></div>
+        </div>
+</div>
+
+<div id = "user_works" style = "padding:50px" class="col-md-12">
+    <h1 class = "user_info">Works</h1>
+    <div style = "margin:40px"></div>
+    {% for post in posts.all %}
+    <div class="col-md-4 user_info" >
+        <img src="{{ post.image.url }}" class="img-rounded photos">
+        <div class="portfolio-caption">
+            <h4>Round Icons</h4>
+            <p class="text-muted" >Graphic Design</p>
+        </div>
+    </div>
+    {% endfor %}
+{#    <div class = "col-md-12" style="margin-top:15px;">#}
+{#        <button id = "works-button" class = "col-md-8 col-md-offset-2 btn btn-info btn-lg" style="background-color:#FFD700;border-color:#FFD700;"> more</button>#}
+{#    </div>#}
+</div>
+
+<div id = "user_favorite"  style = "padding:50px" class="col-md-12">
+<h1 class = "user_info">Favorite</h1>
+    <div style = "margin:40px"></div>
+    {%for fav in favorites.all %}
+    <div class = "col-md-4 user_info" >
+        <img src="{{ fav.image.url }}" class = "img-rounded photos">
+        <div class="portfolio-caption">
+            <h4>Round Icons</h4>
+            <p class="text-muted" >Graphic Design</p>
+        </div>
+    </div>
+    {%endfor%}
+
+    <div class = "col-md-12" style="margin-bottom:30px"></div>
+{#    <div class = "col-md-12" style="margin-top:15px;">#}
+{#        <button id = "favorite-button"class = "col-md-8 col-md-offset-2 btn btn-info btn-lg" style="background-color:#FFD700;border-color:#FFD700;"> more</button>#}
+{#    </div>#}
+</div>
+
+{% endblock %}

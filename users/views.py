@@ -7,12 +7,14 @@ from .models import MyUser
 
 
 # Create your views here.
-def profile(request, uid):
-    try:
-        u = MyUser.objects.get(id=uid)
-    except MyUser.DoesNotExist:
-        raise Http404('User Does Not Exist!')
-    return render(request, 'users/profile.html', {'user': u})
+def profile(request):
+    if not request.user.is_authenticated():
+        messages.add_message(request, messages.ERROR, "请登录或注册账号", extra_tags='login')
+        return redirect('/')
+    own_posts = request.user.myuser.images
+    fav_posts = request.user.myuser.like_images
+
+    return render(request, 'users/profile.html', {"posts": own_posts, "favorites": fav_posts, "user": request.user.myuser})
 
 
 def my_login(request):
@@ -28,7 +30,7 @@ def my_login(request):
         if not request.POST.get('remember', None):
             request.session.set_expiry(0)
         # Redirect to a success page.
-        return HttpResponse('Login Success!')
+        return redirect("/timeline")
     # Login Failed
     messages.add_message(request, messages.ERROR, "用户名或密码错误", extra_tags='login')
     return redirect('/')
@@ -68,7 +70,3 @@ def my_register(request):
         mu.user = u
         mu.save()
     return redirect('/')
-
-
-def myuser(request):
-    return render(request, 'users/myuser.html')

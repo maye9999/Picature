@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'themes',
     'editor',
     'images',
+    'avatar',
 ]
 
 MIDDLEWARE_CLASSES = [

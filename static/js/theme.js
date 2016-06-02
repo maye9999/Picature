@@ -2,7 +2,7 @@
  * Created by MaYe on 2016/6/2.
  */
 
-function apply_theme_background(id, url, theme, theme_id) {
+function apply_theme_and_update(id, url, theme, theme_id) {
     var image = new Image();
 
     image.addEventListener('load', function() {
@@ -21,6 +21,33 @@ function apply_theme_background(id, url, theme, theme_id) {
     image.src = url;
 }
 
+
+function apply_theme_to_canvas(canvas, image, theme) {
+    const sdk = new PhotoEditorSDK('webgl', {
+        canvas: canvas,
+        image: image
+    });
+    theme2stack(sdk, theme);
+    sdk.render().then(function() {
+        console.log("Done!");
+    });
+}
+
+
+function upload_img_to_server(canvas, image, theme_id) {
+    const sdk = new PhotoEditorSDK('webgl', {
+        canvas: canvas,
+        image: image
+    });
+    sdk.export().then(function(imageData) {
+        $.post('/image/upload/', {
+            "image": imageData,
+            "theme_id": theme_id
+        }).success(function() {
+            console.log("done!");
+        });
+    });
+}
 
 function stack2theme(stack) {
     var theme = [];
@@ -237,7 +264,146 @@ function theme2stack(sdk, theme) {
     var stack = JSON.parse(theme).reverse();
     stack.forEach(function(operation) {
         if(operation.identifier === 'filter') {
-
+            switch (operation.name) {
+                case "celsius":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.CelsiusFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "chest":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.ChestFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "fixie":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.FixieFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "lenin":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.LeninFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "pola":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.PolaFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "pola669":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.Pola669Filter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "bw":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.BWFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "bwhard":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.BWHardFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "x400":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.X400Filter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "front":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.FrontFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "mellow":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.MellowFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "semired":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.SemiredFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "sunny":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.SunnyFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "texas":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.TexasFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "a15":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.A15Filter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "breeze":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.BreezeFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "fridge":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.FridgeFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "orchid":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.OrchidFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "quozi":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.QuoziFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "food":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.FoodFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "glam":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.GlamFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "lomo":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.LomoFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+                case "gobblin":
+                    sdk.addOperation(new PhotoEditorSDK.Operations.FilterOperation(sdk, {
+                        filter: PhotoEditorSDK.Filters.GobblinFilter,
+                        intensity: operation.intensity
+                    }));
+                    break;
+            }
         } else if(operation.identifier === 'adjustments') {
             sdk.addOperation(new PhotoEditorSDK.Operations.BorderOperation(sdk, {
                 brightness: operation.brightness,

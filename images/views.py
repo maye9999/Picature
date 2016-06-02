@@ -3,7 +3,7 @@ from base64 import b64decode
 
 import time
 from django.core.files.base import ContentFile
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import ImagePost
 from users.models import MyUser
 from themes.models import Theme
@@ -20,16 +20,21 @@ def image(request, mid):
 
 def upload_image(request):
     _, data = request.POST['image'].split(',')
-    image_name = request.POST['image_name']
-    theme_name = request.POST['theme_name']
-    theme_content = request.POST['theme']
+    try:
+        theme_id = request.POST['theme_id']
+    except:
+        theme_id = -1
     user = request.user.myuser
-
-    theme = Theme()
-    theme.name = theme_name
-    theme.operation = theme_content
-    theme.owner = user
-    theme.save()
+    if theme_id == -1:
+        theme_name = request.POST['theme_name']
+        theme_content = request.POST['theme']
+        theme = Theme()
+        theme.name = theme_name
+        theme.operation = theme_content
+        theme.owner = user
+        theme.save()
+    else:
+        theme = get_object_or_404(Theme, id=theme_id)
 
     post = ImagePost()
     post.user = user
@@ -57,6 +62,16 @@ def change_image(request):
     return HttpResponse("OK")
 
 
-def image_posts(request):
+def get_theme(request):
+    """
+    Get theme_content & theme_id by image_id
+    e.g. /images/get_theme?id=image_id
+    :return: JSON {"theme_content": XXX, "theme_id": id}
+    """
+    id = request.GET['id']
 
-    pass
+    post = get_object_or_404(ImagePost, id=id)
+    theme_content = post.theme.operation
+    theme_id = post.theme.id
+
+    return JsonResponse({"theme_content": theme_content, "theme_id": theme_id})

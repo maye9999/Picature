@@ -1,11 +1,16 @@
+<div style="background-color:#F0F0F0">
+{% load avatar_tags %}
 {% for comment in comments.all %}
-    <div class="portfolio-comment">
-{#         <div class="col-xs-3 col-md-2 col-sm-2 img">#}
-{#            <img src="/static/img/team/head_yym.png" style="max-width: 30%">#}
-{#        </div>#}
-        <label  style = "margin-left:-50px "> {{ comment.user.user.username }} </label>
-        <p class="text-muted" style = "margin-left:30px ">{{ comment.content }}</p>
-        <div align="right"><label class="text-muted" style="margin-right:30px">{{ comment.time }}</label></div>
+    <div>
+        <div class = "col-md-1">
+        {% avatar comment.user.user.username 60 class="img-round" id="user_avatar" %}
+        </div>
+        <div class = "col-md-11">
+            <div class = "col-md-7"><label style = "margin-left:10px"> {{ comment.user.user.username }} </label></div>
+            <div class = "col-md-5"><p class="text-muted" style = "font-style: italic;">{{ comment.time }}</p></div>
+            <div class = "col-md-12"><p style = "margin-left:10px" >{{ comment.content }}</p></div>
+        </div>
+        <div class = "col-md-12" style="margin:10px"></div>
     </div>
 {% endfor %}
 
@@ -17,6 +22,6 @@
        {% else %}
            <button class="btn btn-sm btn-danger" id = "comment_favorite" style = "margin:10px " onclick="like($(this))">favorite</button>
        {% endif %}
-
       <button class="btn btn-sm btn-info" id = "comment_content_commit" style = "margin:10px" onclick="add_comment($(this))">commit</button>
    </div>
+</div>

@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block navbar %}
-    {% include 'framework/navbar.html' %}
+    {% include 'framework/navbar_timeline.html' %}
 {% endblock %}
 
 {% block main_content %}
@@ -71,6 +71,11 @@
         window.search_name = "";
 
         $(function() {
+            $("#search_input").keyup(function(event){
+                if(event.keyCode == 13){
+                    $("#search_button").click();
+                }
+            });
             var win = $(window);
             win.scroll(function() {
                 if ($(document).height() - win.height() == win.scrollTop()) {
@@ -103,7 +108,7 @@
             window.is_stopped = false;
             window.search_name = name;
             $.get('/timeline/posts', {"page": 1, "name": name}, function(data) {
-                $("timeline-main").html(data);
+                $("#timeline-main").html(data);
             });
         }
 

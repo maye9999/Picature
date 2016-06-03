@@ -1,14 +1,16 @@
-<div style="background-color:#F0F0F0">
+<div>
 {% load avatar_tags %}
 {% for comment in comments.all %}
     <div>
-        <div class = "col-md-1">
-        {% avatar comment.user.user.username 60 class="img-round" id="user_avatar" %}
+        <div class = "col-md-1" style="margin-top:4px">
+            {% avatar comment.user.user.username 40 class="img-round" id="user_avatar" %}
         </div>
         <div class = "col-md-11">
-            <div class = "col-md-7"><label style = "margin-left:10px"> {{ comment.user.user.username }} </label></div>
-            <div class = "col-md-5"style = "margin-right:-20px" align="right"><p class="text-muted" style = "font-style: italic;">{{ comment.time|date:"d M Y" }}</p></div>
-            <div class = "col-md-12"><p style = "margin-left:10px" >{{ comment.content }}</p></div>
+            <div class = "col-md-7"><label> {{ comment.user.user.username }} </label></div>
+            <div class = "col-md-5"style = "margin-right:-20px" align="right">
+                <p class="text-muted" style = "font-style: italic;margin-bottom:0px">{{ comment.time|date:"d M Y" }}</p>
+            </div>
+            <div class = "col-md-12"><p>{{ comment.content }}</p></div>
         </div>
         <div class = "col-md-12" style="margin:10px"></div>
     </div>

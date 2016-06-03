@@ -113,7 +113,7 @@
         }
 
         function toggle_comments(sel) {
-            var s = sel.parent().next();
+            var s = sel.parent().parent().parent().next();
             if(s.is(":hidden")) {
                 sel.children().text("Hide Comments");
                 s.toggle('collapse');
@@ -137,16 +137,20 @@
         }
 
         function setlike(sel) {
-            var id = sel.parent().parent().parent().parent().prev().prev().text();
-            if (sel.text() === 'favorite') {
+            // var id = sel.parent().parent().parent().parent().prev().prev().text();
+            var id = sel.parent().parent().prev().text();
+            sel = sel.children().first();
+            console.log('click liked');
+            if (sel.hasClass('fa-heart-o')) {
                 $.ajax('like?post-id='+id).success(function() {
-                    sel.text('unfavorite');
+                    sel.replaceWith('<i class="fa fa-heart fa-lg" style="color:rgb(241,36,37)"></i>');
                 });
-            } else if (sel.text() === 'unfavorite') {
+            } else if (sel.hasClass('fa-heart')) {
                 $.ajax('unlike?post-id='+id).success(function() {
-                    sel.text('favorite');
+                    sel.replaceWith('<i class="fa fa-heart-o fa-lg"></i>');
                 });
             }
+            event.stopPropagation();
         }
 
     </script>

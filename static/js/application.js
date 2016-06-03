@@ -52,6 +52,7 @@ window.onload = function() {
         "theme_private" : theme_private
     }).done(function() {
         console.log('saved!');
+        location.href = '/timeline';
     });
   });
 };

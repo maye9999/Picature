@@ -127,6 +127,7 @@
                 button[0].disabled = false;
                 button[0].onclick = save_photos;
                 button.text("save");
+                window.complete_num = 0;
             }
         }
 
@@ -136,6 +137,14 @@
                 var img = $(this).children().children()[0];
                 upload_img_to_server(img, theme_id);
             });
+        }
+
+        function save_done() {
+            var value = window.complete_num / $("#photo-upload").children().length;
+            if(value === 1) {
+                alert("All Photos Uploaded!");
+                location.href = '/timeline';
+            }
         }
 
     </script>

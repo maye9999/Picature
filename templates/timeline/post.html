@@ -3,7 +3,7 @@
 {% load avatar_tags %}
 
 {% block sheetstyle %}
-
+    <link rel="stylesheet" href={% static "css/myuser.css" %}>
 {% endblock %}
 
 {% block navbar %}
@@ -12,7 +12,33 @@
 
 {% block main_content %}
 
+<div class="col-lg-12" name="imagefield" style="width: 1350px;margin-top:30px;" align="center">
+    <img src = {{post.image.url}} class = "photos" style = "max-width:1350px;max-height:500px;height:auto;">
+</div>
+
+<div class="col-lg-7" name="commentfield">
+    {% for comment in post.comments.all%}
+    <div class = "portfolio-item">
+        <div class = "col-md-1">
+        {% avatar comment.user.user.username 60 class="img-round" id="user_avatar" %}
+        </div>
+        <div class = "col-md-11">
+            <div class = "col-md-7"><label style = "margin-left:10px"> {{ comment.user.username }} </label></div>
+            <div class = "col-md-5"style = "margin-right:-20px" align="right"><p class="text-muted" style = "font-style: italic;">{{ comment.time|date:"d M Y" }}</p></div>
+            <div class = "col-md-12"><p style = "margin-left:10px" >{{ comment.content }}</p></div>
+        </div>
+        <div class = "col-md-12" style="margin:10px"></div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="col-lg-5" name="infofield">
+    <p>{{post.theme}}</p>
+    <p>{{post.description}}</p>
+    {% avatar post.user.user.username 60%}
+</div>
 {% endblock %}
+
 
 {% block script %}
 

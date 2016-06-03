@@ -44,7 +44,7 @@
             <div class="row">
                 {% for post in posts.all %}
                     <div class="col-md-4 col-sm-6 portfolio-item user_info" style="max-width:400px;height:400px;" align="center">
-                        <a href="#portfolioModal" class="portfolio-link" data-toggle="modal">
+                        <a href="/images/{{ post.id }}/detail" class="portfolio-link" data-toggle="modal">
                             <div class="portfolio-hover" data-toggle="tooltip"  onclick="showlargeimg($(this))">
                                 <div class="portfolio-hover-content">
                                     <i class="fa fa-search-plus fa-3x fa-inverse"></i>

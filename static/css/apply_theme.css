@@ -1,0 +1,10 @@
+#photo-gallary .photo-gallary-hover-content .fa-trash-o {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+#photo-gallary .photo-gallary-hover:hover .photo-gallary-hover-content{
+    z-index: 2000;
+    background: rgba(254,209,54,.5);
+}

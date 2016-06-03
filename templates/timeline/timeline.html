@@ -43,73 +43,33 @@
                     <div class="modal-body">
                         <!-- Project Details Go Here -->
                         <h2>Your Photos</h2>
-                        <p class="item-intro text-muted">Choose one or more photos to apply this theme.</p>
-                        <div class="row" id="photo-timeline">
-                            <div class="col-md-3">
+                        <p class="item-intro text-muted">upload a or some photos to see how it works</p>
+                        <div class="col-md-12">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5"><button class="btn btn-danger btn-lg" style="width:200px;margin-bottom:20px;" id="run_button" onclick="run()">run</button></div>
+                            <div class="col-md-5"><a href="javascript:;" class="file btn btn-info btn-lg" style="width:200px;margin-bottom:20px;">upload
+                                <input type="file" name="" id="file_upload">
+                            </a></div>
+                            <div class="col-md-1"></div>
+                        </div>
+
+                        <div id = "photo_test"></div>
+                        <div class="image_container">
+                            <img id="preview" width="60" height="60">
+                        </div>
+                        {% for image in images %}
+                        <div class="row" id="photo-upload">
+                            <div class="col-md-4">
                                 <div class="photo-gallary-hover">
-                                    <img class="img-responsive" src={% static "test.jpg" %} alt="" />
+                                    <img class="img-responsive" style = "max-width:512px;max-height:512px;" src = {{image.path}} alt="" />
                                     <div class="photo-gallary-hover-content">
-                                        <i class="fa fa-check fa-5x"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="photo-gallary-hover">
-                                    <img class="img-responsive" src={% static "img/jump.jpg" %} alt="" />
-                                    <div class="photo-gallary-hover-content">
-                                        <i class="fa fa-check fa-5x"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="photo-gallary-hover">
-                                    <img class="img-responsive" src={% static "img/loading.gif" %} alt="" />
-                                    <div class="photo-gallary-hover-content">
-                                        <i class="fa fa-check fa-5x"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="photo-gallary-hover">
-                                    <img class="img-responsive" src={% static "img/team/2.jpg" %} alt="" />
-                                    <div class="photo-gallary-hover-content">
-                                        <i class="fa fa-check fa-5x"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="photo-gallary-hover">
-                                    <img class="img-responsive" src={% static "img/team/2.jpg" %} alt="" />
-                                    <div class="photo-gallary-hover-content">
-                                        <i class="fa fa-check fa-5x"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="photo-gallary-hover">
-                                    <img class="img-responsive" src={% static "img/team/2.jpg" %} alt="" />
-                                    <div class="photo-gallary-hover-content">
-                                        <i class="fa fa-check fa-5x"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="photo-gallary-hover">
-                                    <img class="img-responsive" src={% static "img/team/2.jpg" %} alt="" />
-                                    <div class="photo-gallary-hover-content">
-                                        <i class="fa fa-check fa-5x"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="photo-gallary-hover">
-                                    <img class="img-responsive" src={% static "img/team/2.jpg" %} alt="" />
-                                    <div class="photo-gallary-hover-content">
-                                        <i class="fa fa-check fa-5x"></i>
+                                        <i class="fa fa-trash-o fa-5x" style="margin-left:20px;"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {% endfor %}
+
                     </div>
                 </div>
             </div>
@@ -198,7 +158,30 @@
                     })
                 }
             })
+
+            $("#file_upload").change(function() {
+                var $file = $(this);
+                var fileObj = $file[0];
+                var windowURL = window.URL || window.webkitURL;
+                var dataURL;
+                var $img = $("#preview");
+
+                if(fileObj && fileObj.files && fileObj.files[0]){
+                dataURL = windowURL.createObjectURL(fileObj.files[0]);
+                $img.attr('src',dataURL);
+                }else{
+                dataURL = $file.val();
+                var imgObj = document.getElementById("preview");
+                // 两个坑:
+                // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+                // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+                imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+                }
+                });
         })
+
     </script>
 
     <script>
@@ -239,6 +222,8 @@
                 sel.text('favorite');
             });
         }
+
+
     </script>
 
 {% endblock %}

@@ -227,3 +227,23 @@ body {
 .btn-modal-apply {
     margin-top: 40px;
 }
+
+/*a  upload */
+file {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    text-decoration: none;
+    text-indent: 0;
+}
+.file input {
+    position: absolute;
+    width:200px;
+    height:50px;
+    right: 125px;
+    top: 0;
+    opacity: 0;
+}
+.file:hover {
+    text-decoration: none;
+}

@@ -3,12 +3,13 @@
 {% load staticfiles %}
 <div class="col-md-6 col-md-offset-3 portfolio-item" style="background-color:white">
 
-    <div style="height:50px">
-    <div class = "col-md-12 " style="margin-top:15px;">
-        <div class = "col-lg-1" style="cursor: pointer; margin-left:-15px" onclick="jump2profile('{{ post.user.id }}')">{% avatar post.user.user.username 24 class="img-round" id="user_avatar" %}</div>
+    <div style="height:80px" id = "card-height">
+    <div class = "col-md-12 " style="margin-top:10px;">
+        <div class = "col-lg-1" style="cursor: pointer; margin-left:-15px" id = "post_head" onclick="jump2profile('{{ post.user.id }}')">{% avatar post.user.user.username 24 class="img-round" id="user_avatar" %}</div>
         <div class = "col-lg-2" style="margin-left:-15px"><label style="cursor: pointer; font-size: 16px" onclick="jump2profile('{{ post.user.id }}')">{{post.user.username}}</label></div>
         <div class = "col-lg-6" style="cursor: pointer; margin-left:30px;margin-top:-20px" onclick="jump2detail('{{ post.id }}')"><h3 align="center">{{post.theme.name}}</h3></div>
         <div class = "col-lg-3"><p class="text-muted" align="right" style = "font-style: italic;">{{ post.upload_time|date:"d M Y"}}</p></div>
+        <div class = "col-lg-12"><p class="text-muted" align="center" style="font-style: italic;" id = "card-description">{{post.description}}</p></div>
     </div>
     </div>
 
@@ -51,4 +52,8 @@
 
 
 </div>
+<script>
+    $('#post_head').children().first().attr("class","img-circle");
+</script>
+
 {% endfor %}

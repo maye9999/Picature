@@ -12,12 +12,12 @@
 {% endblock %}
 
 {% block main_content %}
-
+    <div class="col-lg-12" style = "margin-top: 20px;" align="right"><a href="{% url 'avatar_change' %}"><button class="btn btn-info">change avator</button></a></div>
     <div id = "userhead" style = "margin-top:50px;">
         <div class="col-md-12 user_info">
             <div class = "col-md-4"></div>
             <div class = "col-md-4" id = "user_headicon" sytle="align:center;">
-                {% avatar user 255 %}
+                {% avatar user.username 255 %}
             </div>
             <div class = "col-md-4"></div>
 
@@ -72,7 +72,7 @@
             <div class="row">
                 {% for fav in favorites.all %}
                     <div class="col-md-4 col-sm-6 portfolio-item user_info" style="max-width:400px;height:400px;" align="center">
-                        <a href="#portfolioModal" class="portfolio-link" data-toggle="modal">
+                        <a href="/images/{{ post.id }}/detail" class="portfolio-link" data-toggle="modal">
                             <div class="portfolio-hover" data-toggle="tooltip"  onclick="showlargeimg($(this))">
                                 <div class="portfolio-hover-content">
                                     <i class="fa fa-search-plus fa-3x fa-inverse"></i>

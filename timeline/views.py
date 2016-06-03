@@ -23,9 +23,7 @@ def posts(request):
         page = int(request.GET['page'])
     except:
         page = 1
-    posts = ImagePost.objects.all()
-    if len(posts) >= 10:
-        posts = posts[page*10-10:page*10]
+    posts = ImagePost.objects.all()[page*10-10:page*10]
     return render(request, 'timeline/card.html', {"posts": posts, "user": request.user.myuser})
 
 

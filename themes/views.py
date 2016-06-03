@@ -9,5 +9,11 @@ from django.shortcuts import render, get_object_or_404
 def themes(request):
     tid = request.GET['id']
     theme = get_object_or_404(Theme, id=tid)
-    print(theme.operation)
     return HttpResponse(theme.operation)
+
+
+def apply_theme(request):
+    tid = request.GET['id']
+    theme = get_object_or_404(Theme, id=tid)
+    print("asd")
+    return render(request, 'theme/apply_theme.html', {"theme": theme})

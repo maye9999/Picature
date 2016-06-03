@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import themes
+from .views import *
 urlpatterns = [
-    url(r'^', themes),
+    url(r'^apply', apply_theme),
 ]

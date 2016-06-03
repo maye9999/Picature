@@ -8,3 +8,13 @@
     z-index: 2000;
     background: rgba(254,209,54,.5);
 }
+
+
+.divider {
+  height: 1px;
+  width:100%;
+  display:block; /* for use on default inline elements like span */
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}

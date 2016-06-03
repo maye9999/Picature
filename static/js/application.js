@@ -43,7 +43,7 @@ window.onload = function() {
     console.log(theme);
     var theme_description = $("#theme_description").val();
     var theme_name = $("#theme_name").val();
-    var theme_private = $("#theme_private").val();
+    var theme_private = $("#export-form input[type='radio']:checked").val();
     $.post('/images/upload/', {
         "image" : imageData,
         "theme_description" : theme_description,
@@ -56,4 +56,3 @@ window.onload = function() {
     });
   });
 };
-

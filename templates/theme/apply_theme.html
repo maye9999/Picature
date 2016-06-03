@@ -30,12 +30,14 @@
                     <div class="col-md-1"></div>
                 </div>
 
+                <div class="col-md-12 divider" id="divider1"></div>
 
-
-                <div class="col-md-12" style="margin-top:75px; margin-bottom:30px">
+                <div class="col-md-12" style="margin-top:25px; margin-bottom:25px">
                     <canvas id="preview_canvas" height="600" width="600">
                     </canvas>
                 </div>
+
+                <div class="col-md-12 divider" id="divider2" style="display:none"></div>
 
                 <div class="row" id="photo-upload">
                 </div>
@@ -88,6 +90,7 @@
             } else {
                 ctx.drawImage(img, 0.5 * (canvas.width - img.width / img.height * canvas.height), 0, img.width / img.height * canvas.height, canvas.height);
             }
+            $('#divider2').css('display', 'block')
         }
 
         function remove_photo(sel) {

@@ -55,7 +55,8 @@ function upload_img_to_server(image, theme_id) {
         "image": imageData,
         "theme_id": theme_id
     }).success(function() {
-        console.log("done!");
+        window.complete_num += 1;
+        save_done();
     });
 }
 

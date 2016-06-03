@@ -142,11 +142,19 @@
             console.log('click liked');
             if (sel.hasClass('fa-heart-o')) {
                 $.ajax('like?post-id='+id).success(function() {
+                    sel.next().text("" + (parseInt(sel.next().text()) + 1));
+                    console.log(sel.next());
                     sel.replaceWith('<i class="fa fa-heart fa-lg" style="color:rgb(241,36,37)"></i>');
+
+
                 });
             } else if (sel.hasClass('fa-heart')) {
                 $.ajax('unlike?post-id='+id).success(function() {
+                    sel.next().text("" + (parseInt(sel.next().text()) - 1));
+                    console.log(sel.next());
                     sel.replaceWith('<i class="fa fa-heart-o fa-lg"></i>');
+
+
                 });
             }
             event.stopPropagation();

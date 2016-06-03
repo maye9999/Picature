@@ -2,11 +2,11 @@
 {% load avatar_tags %}
 {% for comment in comments.all %}
     <div>
-        <div class = "col-md-1" style="margin-top:4px">
+        <div class = "col-md-1" style="cursor: pointer; margin-top:4px" onclick="jump2profile('{{ comment.user.id }}')">
             {% avatar comment.user.user.username 40 class="img-round" id="user_avatar" %}
         </div>
         <div class = "col-md-11">
-            <div class = "col-md-7"><label> {{ comment.user.username }} </label></div>
+            <div class = "col-md-7"><label style="cursor: pointer" onclick="jump2profile('{{ comment.user.id }}')"> {{ comment.user.username }} </label></div>
             <div class = "col-md-5"style = "margin-right:-20px" align="right">
                 <p class="text-muted" style = "font-style: italic;margin-bottom:0px">{{ comment.time|date:"d M Y" }}</p>
             </div>
@@ -18,12 +18,7 @@
 
    <div class="form-group"align="right" style = "margin:20px">
       <input type="text" class="form-control" id="comment_content"
-         placeholder="share your comment">
-       {% if user in post.like_users.all %}
-           <button class="btn btn-sm btn-danger" id = "comment_favorite" style = "margin:10px " onclick="setlike($(this))">unfavorite</button>
-       {% else %}
-           <button class="btn btn-sm btn-danger" id = "comment_favorite" style = "margin:10px " onclick="setlike($(this))">favorite</button>
-       {% endif %}
+         placeholder="share your comments">
       <button class="btn btn-sm btn-info" id = "comment_content_commit" style = "margin:10px" onclick="add_comment($(this))">commit</button>
    </div>
 </div>

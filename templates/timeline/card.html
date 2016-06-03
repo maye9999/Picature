@@ -5,9 +5,9 @@
 
     <div style="height:50px">
     <div class = "col-md-12 " style="margin-top:15px;">
-        <div class = "col-lg-1" style="margin-left:-15px">{% avatar post.user.user.username 24 class="img-round" id="user_avatar" %}</div>
-        <div class = "col-lg-2" style="margin-left:-15px"><label style="font-size: 16px">{{post.user.username}}</label></div>
-        <div class = "col-lg-6" style="margin-left:30px;margin-top:-20px"><h3 align="center">{{post.theme.name}}</h3></div>
+        <div class = "col-lg-1" style="cursor: pointer; margin-left:-15px" onclick="jump2profile('{{ post.user.id }}')">{% avatar post.user.user.username 24 class="img-round" id="user_avatar" %}</div>
+        <div class = "col-lg-2" style="margin-left:-15px"><label style="cursor: pointer; font-size: 16px" onclick="jump2profile('{{ post.user.id }}')">{{post.user.username}}</label></div>
+        <div class = "col-lg-6" style="cursor: pointer; margin-left:30px;margin-top:-20px" onclick="jump2detail('{{ post.id }}')"><h3 align="center">{{post.theme.name}}</h3></div>
         <div class = "col-lg-3"><p class="text-muted" align="right" style = "font-style: italic;">{{ post.upload_time|date:"d M Y"}}</p></div>
     </div>
     </div>
@@ -33,8 +33,12 @@
             </div>
             <div class="col-md-6"></div>
             <div class="col-md-2" style="padding-top: 5px; cursor: pointer; display:inline" onclick="setlike($(this))">
-                <i class="fa fa-heart-o fa-lg"></i>
-                <span class="card-like" style="font-size: 15px; margin-left: 4px"> 100+ </span>
+                {% if user in post.like_users.all %}
+                    <i class="fa fa-heart fa-lg" style="color:rgb(241,36,37)"></i>
+                {% else %}
+                    <i class="fa fa-heart-o fa-lg"></i>
+                {% endif %}
+                <span class="card-like" style="font-size: 15px; margin-left: 4px"> {{ post.like_users.count }} </span>
             </div>
         </div>
     </form>

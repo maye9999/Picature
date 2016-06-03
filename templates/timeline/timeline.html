@@ -124,12 +124,11 @@
         }
 
 
-        function add_comment(sel) {
-            var content = sel.prev().prev().val();
+        function add_comment(sel, id) {
+            var content = sel.prev().val();
             if(content === "") {
                 return;
             }
-            var id = sel.parent().parent().parent().parent().prev().prev().text();
             $.ajax('/timeline/add-comment', {data: {"content": content, "post-id": id}, type: "POST"}).done(function (data) {
                 sel.parent().parent().html(data);
             });

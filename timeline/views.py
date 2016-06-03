@@ -44,7 +44,7 @@ def comments(request):
     id = request.GET['post-id']
     image_post = get_object_or_404(ImagePost, id=id)
     comments = image_post.comments
-    return render(request, 'timeline/comments.html', {'comments': comments})
+    return render(request, 'timeline/comments.html', {'comments': comments, "post": image_post})
 
 
 def add_comment(request):
@@ -62,7 +62,7 @@ def add_comment(request):
         comment.save()
 
         comments = image_post.comments
-        return render(request, 'timeline/comments.html', {'comments': comments})
+        return render(request, 'timeline/comments.html', {'comments': comments, "post": image_post})
     else:
         messages.add_message(request, messages.ERROR, "请登录或注册账号", extra_tags='login')
         return redirect('/')
@@ -102,4 +102,3 @@ def tags(request):
 
 def query_posts(page, name=""):
     return ImagePost.objects.filter(is_private=False).filter(theme__name__icontains=name).order_by('-upload_time')[page*10-10:page*10]
-

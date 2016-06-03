@@ -53,22 +53,13 @@
                             <div class="col-md-1"></div>
                         </div>
 
-                        <div id = "photo_test"></div>
                         <div class="image_container">
                             <img id="preview" width="60" height="60">
                         </div>
-                        {% for image in images %}
+
                         <div class="row" id="photo-upload">
-                            <div class="col-md-4">
-                                <div class="photo-gallary-hover">
-                                    <img class="img-responsive" style = "max-width:512px;max-height:512px;" src = {{image.path}} alt="" />
-                                    <div class="photo-gallary-hover-content">
-                                        <i class="fa fa-trash-o fa-5x" style="margin-left:20px;"></i>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                        {% endfor %}
+
 
                     </div>
                 </div>
@@ -169,6 +160,12 @@
                 if(fileObj && fileObj.files && fileObj.files[0]){
                 dataURL = windowURL.createObjectURL(fileObj.files[0]);
                 $img.attr('src',dataURL);
+                $('#photo-upload').append('<div class="col-md-4">'
+                      +'<div class="photo-gallary-hover">'
+                      +'<img class="img-responsive" style = "max-width:512px;max-height:512px;" src = '+ dataURL
+                      + ' alt="" />'
+                      +'<div class="photo-gallary-hover-content">'
+                      +'<i class="fa fa-trash-o fa-5x" style="margin-left:20px;"></i></div></div></div>');
                 }else{
                 dataURL = $file.val();
                 var imgObj = document.getElementById("preview");
@@ -177,7 +174,6 @@
                 // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
                 imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
                 imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
-
                 }
                 });
         })

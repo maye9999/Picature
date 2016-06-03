@@ -5,10 +5,8 @@ body, html {
   padding: 0;
 }
 
-#container {
-  width: 800px;
-  height: 600px;
-  margin: 20px auto;
+#editor-container {
+  text-align: center;
 }
 
 #container.fullscreen {

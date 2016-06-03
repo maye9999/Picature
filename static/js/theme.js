@@ -35,10 +35,10 @@ function apply_theme_to_canvas(image, theme) {
             var canvas = document.getElementById('preview_canvas');
             var ctx = canvas.getContext("2d");
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if(img.width / img.height > canvas.width / canvas.height) {
-                ctx.drawImage(img, 0, 0.5 * (canvas.height - img.height / img.width * canvas.width), canvas.width, img.height / img.width * canvas.width);
+            if(image.width / image.height > canvas.width / canvas.height) {
+                ctx.drawImage(image, 0, 0.5 * (canvas.height - image.height / image.width * canvas.width), canvas.width, image.height / image.width * canvas.width);
             } else {
-                ctx.drawImage(img, 0.5 * (canvas.width - img.width / img.height * canvas.height), 0, img.width / img.height * canvas.height, canvas.height);
+                ctx.drawImage(image, 0.5 * (canvas.width - image.width / image.height * canvas.height), 0, image.width / image.height * canvas.height, canvas.height);
             }
             image.src = i.src;
             window.complete_num += 1;

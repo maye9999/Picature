@@ -25,7 +25,7 @@
 <div class=" row col-lg-5 col-lg-offset-2" name="commentfield">
     {% for comment in post.comments.all%}
     <div class = "portfolio-item col-md-12">
-        <div class = "col-md-2" style="cursor: pointer" onclick="jump2profile('{{ post.user.id }}')" >
+        <div class = "col-md-2" style="cursor: pointer" onclick="jump2profile('{{ comment.user.id }}')" >
         {% avatar comment.user.user.username 60 class="img-round" id="user_avatar"%}
         </div>
         <div class = "col-md-10">

@@ -39,15 +39,16 @@ def upload_image(request):
         theme.name = theme_name
         theme.operation = theme_content
         theme.owner = user
-        theme.description = theme_description
         theme.save()
     else:
         theme = get_object_or_404(Theme, id=theme_id)
         theme_private = "0"
+        theme_description = ""
 
     post = ImagePost()
     post.user = user
     post.theme = theme
+    post.description = theme_description
     if theme_private == "1":
         post.is_private = True
     else:

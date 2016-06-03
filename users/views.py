@@ -2,19 +2,28 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from .models import MyUser
 
 
 # Create your views here.
-def profile(request):
+def home(request):
     if not request.user.is_authenticated():
         messages.add_message(request, messages.ERROR, "请登录或注册账号", extra_tags='login')
         return redirect('/')
-    own_posts = request.user.myuser.images
-    fav_posts = request.user.myuser.like_images
+    uid = request.user.myuser.id
+    return redirect('/u/' + str(uid) + '/profile')
 
-    return render(request, 'users/profile.html', {"posts": own_posts, "favorites": fav_posts, "user": request.user.myuser})
+
+def profile(request, uid):
+    if not request.user.is_authenticated():
+        messages.add_message(request, messages.ERROR, "请登录或注册账号", extra_tags='login')
+        return redirect('/')
+    user = get_object_or_404(MyUser, id=uid)
+    own_posts = user.images
+    fav_posts = user.like_images
+
+    return render(request, 'users/profile.html', {"posts": own_posts, "favorites": fav_posts, "user": user})
 
 
 def my_login(request):

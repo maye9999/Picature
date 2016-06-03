@@ -2,20 +2,25 @@ import uuid
 from base64 import b64decode
 
 import time
+
+from django.contrib import messages
 from django.core.files.base import ContentFile
 from django.http import HttpResponse, JsonResponse
 from .models import ImagePost
 from users.models import MyUser
 from themes.models import Theme
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 
 # Create your views here.
 
 
-def image(request, mid):
-    s = "<p>" + mid + "</p>"
-    return HttpResponse(s)
+def image(request, id):
+    if not request.user.is_authenticated():
+        messages.add_message(request, messages.ERROR, "请登录或注册账号", extra_tags='login')
+        return redirect('/')
+    post = get_object_or_404(ImagePost, id=id)
+    return render(request, 'timeline/post.html', {"post": post})
 
 
 def upload_image(request):

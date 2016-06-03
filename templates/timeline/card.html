@@ -12,8 +12,7 @@
     </div>
     </div>
 
-    <div>
-    <a href="#portfolioModal" class="portfolio-link" data-toggle="modal" data-whatever="{{ post.theme.id }}">
+    <a href="/themes/apply?id={{ post.theme.id }}" class="portfolio-link">
         <div class="portfolio-hover" data-toggle="tooltip" title="click to apply this theme">
             <div class="portfolio-hover-content">
                 <i class="fa fa-arrow-right fa-5x"></i>
@@ -21,7 +20,6 @@
         </div>
         <img src="{{ post.image.url }}"  class="img-responsive" alt="">
     </a>
-    </div>
 
     <!--add-->
     <div id = "Hiddenpart" style="display:none">{{ post.id }}</div>

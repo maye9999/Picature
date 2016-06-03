@@ -13,8 +13,8 @@ def home(request):
         break
     if m is None:
         if request.user.is_authenticated():
-            return render(request, 'index.html', {"user": request.user})
-        return render(request, 'index.html')
+            return render(request, 'index.html', {"user": True})
+        return render(request, 'index.html', {"user": False})
     if m.extra_tags == 'login':
         return render(request, 'index.html', {'login_message': m.message})
     if m.extra_tags == 'register':

@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from .views import *
 urlpatterns = [
-    url(r'^(?P<mid>[0-9]+)/$', image),
+    url(r'^(?P<mid>[0-9]+)/detail$', image),
     url(r'^upload/$', upload_image),
     url(r'^change/$', change_image),
     url(r'^get_theme/$', get_theme),

@@ -2,20 +2,25 @@ import uuid
 from base64 import b64decode
 
 import time
+
+from django.contrib import messages
 from django.core.files.base import ContentFile
 from django.http import HttpResponse, JsonResponse
 from .models import ImagePost
 from users.models import MyUser
 from themes.models import Theme
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 
 # Create your views here.
 
 
-def image(request, mid):
-    s = "<p>" + mid + "</p>"
-    return HttpResponse(s)
+def image(request, id):
+    if not request.user.is_authenticated():
+        messages.add_message(request, messages.ERROR, "请登录或注册账号", extra_tags='login')
+        return redirect('/')
+    post = get_object_or_404(ImagePost, id=id)
+    return render(request, 'timeline/post.html', {"post": post})
 
 
 def upload_image(request):
@@ -28,10 +33,17 @@ def upload_image(request):
     if theme_id == -1:
         theme_name = request.POST['theme_name']
         theme_content = request.POST['theme']
+        theme_description = request.POST['theme_description']
+        theme_private = request.POST['theme_private']
         theme = Theme()
         theme.name = theme_name
         theme.operation = theme_content
         theme.owner = user
+        theme.description = theme_description
+        if theme_private == "1":
+            theme.is_private = True
+        else:
+            theme.is_private = False
         theme.save()
     else:
         theme = get_object_or_404(Theme, id=theme_id)

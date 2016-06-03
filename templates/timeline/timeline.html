@@ -66,6 +66,7 @@
 
         window.current_page = 1;
         window.is_stopped = false;
+        window.search_name = "";
 
         $(function() {
             var win = $(window);
@@ -77,7 +78,7 @@
 {#                    $('#loading').show();#}
                     window.current_page += 1;
                     $.ajax({
-                        url: '/timeline/posts?page=' + window.current_page,
+                        url: '/timeline/posts?page=' + window.current_page + '&name=' + window.search_name,
                         dataType: 'html',
                         success: function(html) {
                             if(html.trim() === "") {
@@ -90,11 +91,20 @@
                     })
                 }
             });
-
-
         });
     </script>
     <script>
+
+        function search() {
+            var name = $("#search_input").val();
+            window.current_page = 1;
+            window.is_stopped = false;
+            window.search_name = name;
+            $.get('/timeline/posts', {"page": 1, "name": name}, function(data) {
+                $("timeline-main").html(data);
+            });
+        }
+
         function toggle_comments(sel) {
             var s = sel.parent().next();
             if(s.is(":hidden")) {

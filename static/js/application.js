@@ -41,15 +41,18 @@ window.onload = function() {
     var theme = stack2theme(stack);
     console.log("user theme :");
     console.log(theme);
-    var image_name = $("#image-name").val();
-    var theme_name = $("#theme-name").val();
+    var theme_description = $("#theme_description").val();
+    var theme_name = $("#theme_name").val();
+    var theme_private = $("#theme_private").val();
     $.post('/images/upload/', {
         "image" : imageData,
-        "image_name" : image_name,
+        "theme_description" : theme_description,
         "theme" : JSON.stringify(theme),
-        "theme_name" : theme_name
+        "theme_name" : theme_name,
+        "theme_private" : theme_private
     }).done(function() {
         console.log('saved!');
     });
   });
 };
+

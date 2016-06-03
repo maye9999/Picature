@@ -28,10 +28,17 @@ def upload_image(request):
     if theme_id == -1:
         theme_name = request.POST['theme_name']
         theme_content = request.POST['theme']
+        theme_description = request.POST['theme_description']
+        theme_private = request.POST['theme_private']
         theme = Theme()
         theme.name = theme_name
         theme.operation = theme_content
         theme.owner = user
+        theme.description = theme_description
+        if theme_private == "1":
+            theme.is_private = True
+        else:
+            theme.is_private = False
         theme.save()
     else:
         theme = get_object_or_404(Theme, id=theme_id)

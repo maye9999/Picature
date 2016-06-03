@@ -17,12 +17,17 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <p>
-                        <label for="image-name">Image Name</label><input type="text" id="image-name">
+                        <label for="theme_name">Theme Name</label><input type="text" id="theme_name">
                     </p>
                     <p>
-                        <label for="theme-name">Theme Name</label><input type="text" id="theme-name">
+                        <label for="theme_description">Theme Description</label><textarea type="text" id="theme_description" rows="5"></textarea>
                     </p>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6"><p><input type="radio" value="1" id="theme_private">private</p></div>
+                        <div class="col-sm-6"><p><input type="radio" value="0" id="theme_private" checked=checked">public</p></div>
+                    </div>
                 </div>
+                <div style="margin-bottom: 15px;"></div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" data-dismiss="modal" id="export-image">Save changes</button>
                     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

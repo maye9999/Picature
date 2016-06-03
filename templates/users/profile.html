@@ -107,6 +107,9 @@
 {% block script %}
 
     <script>
+
+        $('#user_headicon').children().first().attr("class","img-circle");
+
         function showlargeimg(sel) {
             var path = sel.next()[0].src;
             $('#largeimg').attr("src",path);

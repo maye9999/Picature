@@ -274,7 +274,7 @@
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-success btn-block">LogIn</button>
                                 <hr/>
-                                <div class="btn btn-primary btn-block" id="sign-in-google">使用微博账号登陆</div>
+                                <div class="btn btn-primary btn-block" id="sign-in-google" onclick="oauth()">使用微博账号登陆</div>
                                 <div class="btn btn-primary btn-block pull-down" id="sign-in-google">使用微信账号登陆</div>
                             </form>
                         </div>
@@ -332,6 +332,10 @@
                 $('.nav-tabs a[href="#' + 'register' + '"]').tab('show');
             });
         {% endif %}
+
+        function oauth() {
+            location.href ="https://api.weibo.com/oauth2/authorize?client_id=2027959579&response_type=code&redirect_uri=127.0.0.1:8000/callback";
+        }
 
     </script>
 {% endblock %}

@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from editor.views import home
+from editor.views import home, oauth_callback
 
 
 urlpatterns = [
@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^editor/', include('editor.urls')),
     url(r'^timeline/', include('timeline.urls')),
     url(r'^$', home, name='home'),
+    url(r'^callback', oauth_callback),
     url(r'^avatar/', include('avatar.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

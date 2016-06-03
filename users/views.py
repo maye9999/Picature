@@ -77,5 +77,7 @@ def my_register(request):
 
         mu = MyUser()
         mu.user = u
+        mu.type = 0
+        mu.username = username
         mu.save()
     return redirect('/')

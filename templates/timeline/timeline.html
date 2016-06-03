@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block navbar %}
-    {% include 'framework/navbar.html' %}
+    {% include 'framework/navbar_timeline.html' %}
 {% endblock %}
 
 {% block main_content %}
@@ -18,14 +18,6 @@
                 <h3 class="section-subheading text-muted">Let's enjoy it.</h3>
             </div>
         </div>
-        <div>
-            <div class="col-lg-3"></div>
-            <div class="col-lg-5"><input name="query" type="text" class="form-control" id = "search_input" placeholder="search your interst"></div>
-            <div class="col-lg-2"><button class= "btn btn-info" type="submit" onclick="search()">Search</button></div>
-            <div class="col-lg-2"></div>
-        </div>
-
-        <div style="padding: 20px;"></div>
 
         <div class="row" id="timeline-main">
             {% include 'timeline/card.html' %}
@@ -79,6 +71,11 @@
         window.search_name = "";
 
         $(function() {
+            $("#search_input").keyup(function(event){
+                if(event.keyCode == 13){
+                    $("#search_button").click();
+                }
+            });
             var win = $(window);
             win.scroll(function() {
                 if ($(document).height() - win.height() == win.scrollTop()) {
@@ -111,7 +108,7 @@
             window.is_stopped = false;
             window.search_name = name;
             $.get('/timeline/posts', {"page": 1, "name": name}, function(data) {
-                $("timeline-main").html(data);
+                $("#timeline-main").html(data);
             });
         }
 
@@ -139,20 +136,18 @@
             });
         }
 
-        function like(sel) {
+        function setlike(sel) {
             var id = sel.parent().parent().parent().parent().prev().prev().text();
-            $.ajax('like?post-id=' + id).success(function() {
-                sel.text('unfavorite');
-            });
+            if (sel.text() === 'favorite') {
+                $.ajax('like?post-id='+id).success(function() {
+                    sel.text('unfavorite');
+                });
+            } else if (sel.text() === 'unfavorite') {
+                $.ajax('unlike?post-id='+id).success(function() {
+                    sel.text('favorite');
+                });
+            }
         }
-
-        function unlike(sel) {
-            var id = sel.parent().parent().parent().parent().prev().prev().text();
-            $.ajax('unlike?post-id=' + id).success(function() {
-                sel.text('favorite');
-            });
-        }
-
 
     </script>
 

@@ -18,12 +18,7 @@
 
    <div class="form-group"align="right" style = "margin:20px">
       <input type="text" class="form-control" id="comment_content"
-         placeholder="share your comment">
-       {% if user in post.like_users.all %}
-           <button class="btn btn-sm btn-danger" id = "comment_favorite" style = "margin:10px " onclick="setlike($(this))">unfavorite</button>
-       {% else %}
-           <button class="btn btn-sm btn-danger" id = "comment_favorite" style = "margin:10px " onclick="setlike($(this))">favorite</button>
-       {% endif %}
+         placeholder="share your comments">
       <button class="btn btn-sm btn-info" id = "comment_content_commit" style = "margin:10px" onclick="add_comment($(this))">commit</button>
    </div>
 </div>

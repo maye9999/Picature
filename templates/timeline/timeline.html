@@ -136,20 +136,18 @@
             });
         }
 
-        function like(sel) {
+        function setlike(sel) {
             var id = sel.parent().parent().parent().parent().prev().prev().text();
-            $.ajax('like?post-id=' + id).success(function() {
-                sel.text('unfavorite');
-            });
+            if (sel.text() === 'favorite') {
+                $.ajax('like?post-id='+id).success(function() {
+                    sel.text('unfavorite');
+                });
+            } else if (sel.text() === 'unfavorite') {
+                $.ajax('unlike?post-id='+id).success(function() {
+                    sel.text('favorite');
+                });
+            }
         }
-
-        function unlike(sel) {
-            var id = sel.parent().parent().parent().parent().prev().prev().text();
-            $.ajax('unlike?post-id=' + id).success(function() {
-                sel.text('favorite');
-            });
-        }
-
 
     </script>
 

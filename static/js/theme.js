@@ -22,31 +22,62 @@ function apply_theme_and_update(id, url, theme, theme_id) {
 }
 
 
-function apply_theme_to_canvas(canvas, image, theme) {
-    const sdk = new PhotoEditorSDK('webgl', {
-        canvas: canvas,
-        image: image
+function apply_theme_to_canvas(image, theme) {
+    var newImage = new Image();
+    newImage.addEventListener('load', function() {
+
+        const sdk = new PhotoEditorSDK('webgl', {
+            image: newImage
+        });
+        console.log(theme);
+        theme2stack(sdk, theme);
+        sdk.export(PhotoEditorSDK.RenderType.IMAGE).then(function(i) {
+            var canvas = document.getElementById('preview_canvas');
+            var ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if(i.width > i.height) {
+                canvas.width = 600;
+                canvas.height = 600*i.height / i.width;
+                ctx.drawImage(i, 0, 0, 600, 600*i.height / i.width);
+            } else {
+                canvas.height = 600;
+                canvas.width = 600*i.width / i.height;
+                ctx.drawImage(i, 0, 0, 600*i.width / i.height, 600);
+            }
+            image.src = i.src;
+            window.complete_num += 1;
+            run_done();
+        });
     });
-    theme2stack(sdk, theme);
-    sdk.render().then(function() {
-        console.log("Done!");
-    });
+    newImage.src = image.src;
 }
 
 
-function upload_img_to_server(canvas, image, theme_id) {
-    const sdk = new PhotoEditorSDK('webgl', {
-        canvas: canvas,
-        image: image
+function upload_img_to_server(image, theme_id) {
+    var imageData = getBase64Image(image);
+    $.post('/images/upload/', {
+        "image": imageData,
+        "theme_id": theme_id
+    }).success(function() {
+        console.log("done!");
     });
-    sdk.export().then(function(imageData) {
-        $.post('/image/upload/', {
-            "image": imageData,
-            "theme_id": theme_id
-        }).success(function() {
-            console.log("done!");
-        });
-    });
+}
+
+function getBase64Image(img) {
+    // Create an empty canvas element
+    var canvas = document.createElement("canvas");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+
+    // Copy the image contents to the canvas
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    // Get the data-URL formatted image
+    // Firefox supports PNG and JPEG. You could check img.src to
+    // guess the original format, but be aware the using "image/jpg"
+    // will re-encode the image.
+    return canvas.toDataURL("image/png");
 }
 
 function stack2theme(stack) {
@@ -405,7 +436,7 @@ function theme2stack(sdk, theme) {
                     break;
             }
         } else if(operation.identifier === 'adjustments') {
-            sdk.addOperation(new PhotoEditorSDK.Operations.BorderOperation(sdk, {
+            sdk.addOperation(new PhotoEditorSDK.Operations.AdjustmentsOperation(sdk, {
                 brightness: operation.brightness,
                 saturation: operation.saturation,
                 contrast: operation.contrast

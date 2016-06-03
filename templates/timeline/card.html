@@ -12,7 +12,7 @@
     </div>
     </div>
 
-    <a href="#portfolioModal" class="portfolio-link" data-toggle="modal">
+    <a href="#portfolioModal" class="portfolio-link" data-toggle="modal" data-whatever="{{ post.theme.id }}">
         <div class="portfolio-hover" data-toggle="tooltip" title="click to apply this theme">
             <div class="portfolio-hover-content">
                 <i class="fa fa-arrow-right fa-5x"></i>
@@ -24,7 +24,7 @@
     <!--add-->
     <div id = "Hiddenpart" style="display:none">{{ post.id }}</div>
 
-    <form class="form-inline" style = "margin:15px">
+    <form class="form-inline" style = "margin:15px; cursor: pointer">
         <div id="toggle-comments" align="center" onclick="toggle_comments($(this))">
             <h5> Show Comments</h5>
         </div>

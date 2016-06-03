@@ -15,11 +15,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 # Create your views here.
 
 
-def image(request, id):
+def image(request, mid):
     if not request.user.is_authenticated():
         messages.add_message(request, messages.ERROR, "请登录或注册账号", extra_tags='login')
         return redirect('/')
-    post = get_object_or_404(ImagePost, id=id)
+    post = get_object_or_404(ImagePost, id=mid)
     return render(request, 'timeline/post.html', {"post": post})
 
 

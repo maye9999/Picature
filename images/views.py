@@ -40,17 +40,18 @@ def upload_image(request):
         theme.operation = theme_content
         theme.owner = user
         theme.description = theme_description
-        if theme_private == "1":
-            theme.is_private = True
-        else:
-            theme.is_private = False
         theme.save()
     else:
         theme = get_object_or_404(Theme, id=theme_id)
+        theme_private = "0"
 
     post = ImagePost()
     post.user = user
     post.theme = theme
+    if theme_private == "1":
+        post.is_private = True
+    else:
+        post.is_private = False
     data = b64decode(data)
     image_name = str(uuid.uuid4()) + ".png"
     post.image = ContentFile(data, image_name)

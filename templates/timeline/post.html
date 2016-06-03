@@ -12,16 +12,15 @@
 
 {% block main_content %}
 
-<div class="col-lg-12" style="margin-top:35px;margin-bottom:15px;" align="center"><h1>{{post.theme}}</h1></div>
-
-<div class="col-lg-12" name="imagefield" style="width: 1350px;margin-top:30px;" align="center">
+<div class="col-lg-12 portfolio-caption" style="margin-top:25px;" align="center">
+    <h1>{{post.theme.name}}</h1>
+    <p class="text-muted user_info" style = "font-style: italic;">{{post.description}}</p>
+</div>
+<div class="col-lg-12" name="imagefield" style="width: 1350px;margin-top:15px;" align="center">
     <img src = {{post.image.url}} class = "photos" style = "max-width:1350px;max-height:500px;height:auto;">
 </div>
 
-<div class="col-lg-12" style="padding:35px;"></div>
-
-<div class="col-lg-12" style="padding:35px;"><p>{{post.description}}</p></div>
-
+<div class="col-lg-12" style="padding:25px;"></div>
 
 <div class=" row col-lg-5 col-lg-offset-2" name="commentfield">
     {% for comment in post.comments.all%}
@@ -38,16 +37,17 @@
     </div>
     {% endfor %}
 </div>
-<div class="col-lg-5" name="infofield">
+<div class="col-lg-5" name="infofield" style="margin-left: -100px;">
     <div class = "col-lg-12 row">
-        <div class = "photos" align="center">{% avatar post.user.user.username 255 %}</div>
-        <p>{{post.theme}}</p>
-        <p>{{post.description}}</p>
+        <div align="center" id = "poster_img">{% avatar post.user.user.username 255 %}</div>
+        <h3 align="center" id = "poster_name">{{post.user.username}}</h3>
     </div>
 </div>
 {% endblock %}
 
 
 {% block script %}
-
+<script>
+    $('#poster_img').children().first().attr("class","photos img-circle");
+</script>
 {% endblock %}

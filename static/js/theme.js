@@ -35,14 +35,10 @@ function apply_theme_to_canvas(image, theme) {
             var canvas = document.getElementById('preview_canvas');
             var ctx = canvas.getContext("2d");
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if(i.width > i.height) {
-                canvas.width = 600;
-                canvas.height = 600*i.height / i.width;
-                ctx.drawImage(i, 0, 0, 600, 600*i.height / i.width);
+            if(img.width / img.height > canvas.width / canvas.height) {
+                ctx.drawImage(img, 0, 0.5 * (canvas.height - img.height / img.width * canvas.width), canvas.width, img.height / img.width * canvas.width);
             } else {
-                canvas.height = 600;
-                canvas.width = 600*i.width / i.height;
-                ctx.drawImage(i, 0, 0, 600*i.width / i.height, 600);
+                ctx.drawImage(img, 0.5 * (canvas.width - img.width / img.height * canvas.height), 0, img.width / img.height * canvas.height, canvas.height);
             }
             image.src = i.src;
             window.complete_num += 1;

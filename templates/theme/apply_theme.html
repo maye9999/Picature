@@ -15,28 +15,30 @@
     <div class="container" id="photo-gallary" style="padding-top: 75px">
         <div class="row">
             <div class="col-lg-12 text-center">
-                    <!-- Project Details Go Here -->
-                    <h2>Upload Your Photos</h2>
-                    <p class="item-intro text-muted" style="margin-bottom:30px">upload some photos to see how it works</p>
-                    <div style="display: none" id="theme_id">{{ theme.id }}</div>
-                    <div style="display: none" id="theme_content">{{ theme.operation }}</div>
-                    <div class="col-md-12">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-5"><a href="javascript:;" class="file btn btn-info btn-lg" style="width:200px;margin-bottom:20px;">upload
-                            <!-- TODO: input size is not button size -->
-                            <input type="file" name="" id="file_upload" accept="image/*">
-                        </a></div>
-                        <div class="col-md-5"><button class="btn btn-danger btn-lg" style="width:200px;margin-bottom:20px;" id="run_button" onclick="run()" disabled>run</button></div>
-                        <div class="col-md-1"></div>
-                    </div>
+                <!-- Project Details Go Here -->
+                <h2>Upload Your Photos</h2>
+                <p class="item-intro text-muted" style="margin-bottom:30px">upload some photos to see how it works</p>
+                <div style="display: none" id="theme_id">{{ theme.id }}</div>
+                <div style="display: none" id="theme_content">{{ theme.operation }}</div>
+                <div class="col-md-12">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5"><a href="javascript:;" class="file btn btn-info btn-lg" style="width:200px;margin-bottom:20px;">upload
+                        <!-- TODO: input size is not button size -->
+                        <input type="file" name="" id="file_upload" accept="image/*">
+                    </a></div>
+                    <div class="col-md-5"><button class="btn btn-danger btn-lg" style="width:200px;margin-bottom:20px;" id="run_button" onclick="run()" disabled>run</button></div>
+                    <div class="col-md-1"></div>
+                </div>
 
-                    <div class="col-md-12" style="margin-top:75px; margin-bottom:30px">
-                        <canvas id="preview_canvas" height="600" width="600">
-                        </canvas>
-                    </div>
 
-                    <div class="row" id="photo-upload">
-                    </div>
+
+                <div class="col-md-12" style="margin-top:75px; margin-bottom:30px">
+                    <canvas id="preview_canvas" height="600" width="600">
+                    </canvas>
+                </div>
+
+                <div class="row" id="photo-upload">
+                </div>
             </div>
         </div>
     </div>
@@ -54,26 +56,15 @@
                 var fileObj = $file[0];
                 var windowURL = window.URL || window.webkitURL;
                 var dataURL;
-{#                var $img = $("#preview");#}
 
                 if(fileObj && fileObj.files && fileObj.files[0]){
                     dataURL = windowURL.createObjectURL(fileObj.files[0]);
-{#                    $img.attr('src',dataURL);#}
                     $('#photo-upload').append('<div class="col-md-3">'
                             +'<div class="photo-gallary-hover" onclick="preview_photo($(this))">'
                             +'<img class="img-responsive" onload="preview_photo($(this).parent())" style = "max-width:512px;max-height:512px;" src = '+ dataURL
                             + ' alt="" />'
                             +'<div class="photo-gallary-hover-content">'
                             +'<i class="fa fa-trash-o fa-3x" onclick="remove_photo($(this))"></i></div></div></div>');
-
-                }else{
-{#                    dataURL = $file.val();#}
-{#                    var imgObj = document.getElementById("preview");#}
-                    // 两个坑:
-                    // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
-                    // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
-{#                    imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";#}
-{#                    imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;#}
 
                 }
                 $('#run_button')[0].disabled = false;
@@ -87,16 +78,15 @@
             var img = sel.children()[0];
             var canvas = $("#preview_canvas")[0];
             var ctx = canvas.getContext("2d");
-            console.log("preview");
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if(img.width > img.height) {
-                canvas.width = 600;
-                canvas.height = 600*img.height / img.width;
-                ctx.drawImage(img, 0, 0, 600, 600*img.height / img.width);
+            canvas.style.width ='100%';
+            canvas.style.height='100%';
+            canvas.width  = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            if(img.width / img.height > canvas.width / canvas.height) {
+                ctx.drawImage(img, 0, 0.5 * (canvas.height - img.height / img.width * canvas.width), canvas.width, img.height / img.width * canvas.width);
             } else {
-                canvas.height = 600;
-                canvas.width = 600*img.width / img.height;
-                ctx.drawImage(img, 0, 0, 600*img.width / img.height, 600);
+                ctx.drawImage(img, 0.5 * (canvas.width - img.width / img.height * canvas.height), 0, img.width / img.height * canvas.height, canvas.height);
             }
         }
 
@@ -130,17 +120,22 @@
         }
 
         function run_done() {
-            // TODO: Add Progress Bar
-            // TODO: Change logic
-            if(window.complete_num === $("#photo-upload").children().length) {
+            var value = window.complete_num / $("#photo-upload").children().length;
+            if(value === 1) {
                 alert("All done!");
-                var theme_id = $("#theme_id").text();
-                $("#photo-upload").children().each(function() {
-                    var img = $(this).children().children()[0];
-                    upload_img_to_server(img, theme_id);
-                });
-{#                window.complete_num = 0;#}
+                var button = $('#run_button');
+                button[0].disabled = false;
+                button[0].onclick = save_photos;
+                button.text("save");
             }
+        }
+
+        function save_photos() {
+            var theme_id = $("#theme_id").text();
+            $("#photo-upload").children().each(function() {
+                var img = $(this).children().children()[0];
+                upload_img_to_server(img, theme_id);
+            });
         }
 
     </script>

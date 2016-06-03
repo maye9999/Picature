@@ -14,7 +14,7 @@ def home(request):
     if not request.user.is_authenticated():
         messages.add_message(request, messages.ERROR, "请登录或注册账号", extra_tags='login')
         return redirect('/')
-    posts = ImagePost.objects.all()[:10]
+    posts = query_posts(1)
     return render(request, 'timeline/timeline.html', {"posts": posts, "user": request.user.myuser})
 
 
@@ -23,7 +23,7 @@ def posts(request):
         page = int(request.GET['page'])
     except:
         page = 1
-    posts = ImagePost.objects.all()[page*10-10:page*10]
+    posts = query_posts(page)
     return render(request, 'timeline/card.html', {"posts": posts, "user": request.user.myuser})
 
 
@@ -94,3 +94,8 @@ def tags(request):
     id = request.GET['post-id']
     image_post = get_object_or_404(ImagePost, id=id)
     tags = image_post.tags
+
+
+def query_posts(page):
+    return ImagePost.objects.filter(is_private=False).order_by('-upload_time')[page*10-10:page*10]
+

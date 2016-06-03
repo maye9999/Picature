@@ -16,9 +16,9 @@
     </div>
 {% endfor %}
 
-   <div class="form-group"align="right" style = "margin:20px">
+   <div class="form-group"align="right" style = "margin: 15px 15px 15px 15px">
       <input type="text" class="form-control" id="comment_content"
          placeholder="share your comments">
-      <button class="btn btn-sm btn-info" id = "comment_content_commit" style = "margin:10px" onclick="add_comment($(this))">commit</button>
+      <button class="btn btn-sm btn-primary" id = "comment_content_commit" style = "margin-top:10px" onclick="add_comment($(this), {{ post.id }})">commit</button>
    </div>
 </div>
